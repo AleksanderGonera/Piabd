@@ -7,5 +7,5 @@ polecenia sql:
 6. usuwanie tabeli - drop "nazwa_tabeli";
 7. tworzenie bazy - create database "nazwa_bazy";
 8. tworzenie tabeli - create table "nazwa_tabeli";   
-praca domowa obejrzec pasja informatyki kurs mysql odc. 1: bazy danych (https://www.youtube.com/watch?v=99JAI24Zd24)
+(https://www.youtube.com/watch?v=99JAI24Zd24)
  

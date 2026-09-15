@@ -3,9 +3,9 @@ polecenia sql:
 2. pokazywanie baz danych - show databases;
 3. wybor bazy - use "nazwa_bazy";
 4. pokazywanie zawartosci bazy - show tables;
-5. pokaywanie zawartosci tabeli - describe (nazwa tabeli)
+5. pokaywanie zawartosci tabeli - describe "nazwa tabeli"
 6. usuwanie tabeli - drop "nazwa_tabeli"
 7. tworzenie bazy - create database "nazwa_bazy";
-8. tworzenie tabeli - CREATE TABLE "nazwa_tabeli (id INT);   
+8. tworzenie tabeli - create table "nazwa_tabeli";   
 praca domowa obejrzec pasja informatyki kurs mysql odc. 1: bazy danych (https://www.youtube.com/watch?v=99JAI24Zd24)
  

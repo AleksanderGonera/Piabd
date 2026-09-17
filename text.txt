@@ -3,3 +3,26 @@ SELECT * FROM 4bgr1.auto LIMIT 5;
 WHERE paliwo="D" and typ="kombi"and kolor="zielony" and rocznik < 2000;
 WHERE paliwo="D" or paliwo="G" ORDER by cena DESC/ASC;
 SELECT kolor,typ,uwagi FROM auto WHERE kolor"żółty" ORDER BY cena DESC LIMIT 3;
+Zapytania do bazy sql
+Select
+* - wszystko z tabeli
+FROM
+WHERE
+OR i AND
+ORDER BY
+ASC
+DESC 
+BETWEEN
+LIKE
+LIMIT
+używać ; raz na końcu
+<> nierówny, >= większy lub równy, <= mniejszy lub równy
+/*tekst*/ -> komentarz
+where 
+cena <> 1 and cena <> 2 
+BETWEEN 1 AND 2 a przy użyciu string 'A' AND 'N'
+NOT BETWEEN
+ORDER BY cena DESC limit 3
+/*nierówny za wyjątkiem dwóch 3 rekordy posortowane malejąco - DESC*/
+tabela auto
+kolumna cena

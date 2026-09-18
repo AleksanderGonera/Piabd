@@ -36,3 +36,4 @@ update auto set cena = cena * 1.5
 insert into auto (przebieg, rocznik) values ("1500", "2015");
 update auto set przebieg = przebieg *2;
 delete from auto where przebieg = 2015;
+limi 5 , 17;

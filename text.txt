@@ -26,3 +26,13 @@ ORDER BY cena DESC limit 3
 /*nierówny za wyjątkiem dwóch 3 rekordy posortowane malejąco - DESC*/
 tabela auto
 kolumna cena
+INSERT INTO
+UPDATE 
+DELETE FROM
+DROP TABLE
+update auto set kolor="pomarańczowy" where auto_id=6;
+INSERT INTO auto (kolor, typ) values ("zielony", "hatchback");
+update auto set cena = cena * 1.5
+insert into auto (przebieg, rocznik) values ("1500", "2015");
+update auto set przebieg = przebieg *2;
+delete from auto where przebieg = 2015;

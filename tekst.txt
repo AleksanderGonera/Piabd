@@ -1,0 +1,23 @@
+SELECT year(data_urodzenia) AS rok_urodzenia_ucznia,
+COUNT(*) AS liczba_urodzeń_uczniów
+FROM 4bgr1.uczniowie
+w3schools sql group by
+funkcje agregujące
+GROUP BY year(data_urodzenia)
+ORDER BY rok_urodzenia_ucznia ASC;
+piekarnia_uczen pliki, pliki#2020
+COUNT() – zlicza liczbę wierszy lub niepustych wartości w kolumnie; COUNT(*) liczy wszystkie wiersze, a COUNT(kolumna) pomija wartości NULL. 
+AVG() – wyznacza średnią arytmetyczną wartości liczbowych, bazując wyłącznie na niepustych rekordach. 
+MIN() – zwraca najmniejszą wartość w kolumnie (działa na liczbach, datach i tekstach). 
+MAX() – zwraca największą wartość w kolumnie (działa na liczbach, datach i tekstach). 
+SUM() – oblicza sumę wartości liczbowych w kolumnie, ignorując NULL. 
+SELECT MIN(data urodzenia) AS wiek FROM uczniowie
+SELECT COUNT(*) FROM uczniowie WHERE hobby="informatyka";       /FROM auto WHERE cena > 30000;
+SELECT SUM(cena) AS całkowita_wartość_aut FROM auto
+SELECT AVG(cena) AS średnia FROM auto
+piątek total commander
+(zaawansowane wyszukiwanie rozmiar, tekst, bity, bajty, rozpakowywanie pliów przez zip i może rar, tworzenie plików, sumy kontrolne, 
+weryfikacja, tworzenie nazw plików, podstawowe operacje)
+1-2 tygodnie php i sql na moodle (?)
+INSERT into uczniowie (id,'nazwisko', data_urodzenia ,miejscowosc)
+VALUES (value1,2,3)

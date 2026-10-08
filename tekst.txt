@@ -70,4 +70,4 @@ ON *
 TO jank;
 TO jank identified by '';
 inf 03 04 github arkusze
-
+net stop mysql;

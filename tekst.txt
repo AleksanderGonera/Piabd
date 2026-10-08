@@ -15,9 +15,13 @@ SELECT MIN(data urodzenia) AS wiek FROM uczniowie
 SELECT COUNT(*) FROM uczniowie WHERE hobby="informatyka";       /FROM auto WHERE cena > 30000;
 SELECT SUM(cena) AS całkowita_wartość_aut FROM auto
 SELECT AVG(cena) AS średnia FROM auto
-piątek total commander
+piątek total commander 1 ocena
 (zaawansowane wyszukiwanie rozmiar, tekst, bity, bajty, rozpakowywanie pliów przez zip i może rar, tworzenie plików, sumy kontrolne, 
 weryfikacja, tworzenie nazw plików, podstawowe operacje)
-1-2 tygodnie php i sql na moodle (?)
-INSERT into uczniowie (id,'nazwisko', data_urodzenia ,miejscowosc)
+github i git też może 2 ocena
+1-2 tygodnie phpmyadmin, konfiguracja oprogramowania, informacje o portach i usługach - kartkówka na moodle 3 ocena
+INSERT into uczniowie (id,'nazwisko', data_urodzenia, miejscowosc)
 VALUES (value1,2,3)
+.
+vamp server
+pytanie i odpowiedź do poleceń

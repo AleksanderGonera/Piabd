@@ -25,3 +25,49 @@ VALUES (value1,2,3)
 .
 vamp server
 pytanie i odpowiedź do poleceń
+mysql -u root --password=hasło
+mysql -u root -phasło
+mysql -u root -p
+show databases;
+use 4bgr1;
+show tables;
+describe uczniowie;
+dlaczego primary/uni
+dlaczego key yes/no
+mysqladmin -u root shutdown
+
+uruchomienie serwera mysql jako odzielną aplikację
+mysqld --console
+
+zatrzymanie usługi
+net stop nazwa_usługi
+
+kończenie połączenia z serwerem
+quit
+
+CREATE DATABASE nazwa_bazy;
+DROP ...
+
+wybory bazy
+use nazwa_bazy
+mysql -u nazwa_użytkownika -phasło nazwa_bazy
+mysql nazwa_bazy -u nazwa_użytkownika -phasło
+
+CREATE USER nazwa [IDENTIFIED BY [PASSWORD] 'hasło'];
+'user1'@'host1.mojadomena.com'
+@'%.
+@'213.186.88.113'
+88.%'
+'user1'@'%'
+CREATE USER stachu IDENTIFIED BY 'kalafior';
+DROP USER jank, andrzej_n;
+RENAME USER stara_nazwa TO nowa_nazwa;
+SET PASSWORD FOR jan_kowalski = PASSWORD('kalafior1');
+
+Nadawanie praw do konta użytkownika
+GRANT usage
+ON *
+TO jank;
+TO jank identified by '';
+inf 03 04 github arkusze
+

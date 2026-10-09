@@ -71,3 +71,14 @@ TO jank;
 TO jank identified by '';
 inf 03 04 github arkusze
 net stop mysql;
+
+Pobieranie wierszy od konkretnych pozycji
+SELECT * FROM Osoby ORDER BY Nazwisko LIMIT 4, 3;  (od 4 rekordu pokaż 3)
+
+DELETE FROM Osoby (usunięcie wszystkich danych z tabeli)
+...WHERE Id IN (3, 5, 7); (usuwanie wybranych rekordów)
+Where Id BETWEEN 3 AND 5;
+Where Id >= 3 AND Id <=5;
+(usuwanie wierszy z konkretnego przedziału)
+
+delete from auto where kolor='żółty';

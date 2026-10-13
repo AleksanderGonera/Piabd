@@ -184,3 +184,5 @@ balena etcher, figma agent, epson, calibre, jetbrains rider, mongoDB, node.js, r
 
 w domu wlozyc kolumne ze zdjeciem do jednego lub dwoch php my admin, export do sql a potem i przed i po zdjeciu porownac baze
 backup mysql dump poleceniem w shellu xampp zrobic
+
+INSERT INTO `uczniowie` (`id`, `nazwisko`, `imie`, `data_urodzenia`, `miejscowosc`, `kod_pocztowy`, `email`, `telefon`, `hobby`) VALUES (NULL, 'Lis', 'Piotr', '1980', 'Warszawa', '00-000', 'piotrlis@uczen.pl', '123 456 789', 'programowanie'), (NULL, 'Jantar', 'Marian', '2000', 'Warszawa', '00-000', 'marianjantar@uczen.pl', '123-564-789', 'wędkarstwo');

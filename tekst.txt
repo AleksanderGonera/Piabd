@@ -82,3 +82,83 @@ Where Id >= 3 AND Id <=5;
 (usuwanie wierszy z konkretnego przedziału)
 
 delete from auto where kolor='żółty';
+
+zrobić poradnik (tutorial) - git
+pdf (tytuł, spis treści, numery stron, nagłówki, zrzuty ekranu (podpisane i ponumerowane)
+jak pracować z gitem, własne zrzuty i dokument dobrze zrobiony aby każdy zrozumiał
+co to git, polecenia najbardziej chodliwe, co potrafi
+onlyoffice/libreoffice ale na one drive jest word lepszy
+
+jak pisać poprawnie samozdanie
+
+Pisanie poprawnego **sprawozdania** wymaga oparcia tekstu na faktach, chronologii i przejrzystej strukturze, unikając zbędnych dygresji oraz emocjonalnych ocen. Dokument powinien zawierać konkretny **tytuł**, **wstęp** z datą, miejscem i uczestnikami, **opis przebiegu** wydarzeń w kolejności chronologicznej oraz **zakończenie** z wnioskami.
+
+### Kluczowe elementy i zasady
+*   **Struktura**: Najbezpieczniejszy układ to wstęp, rozwinięcie (przebieg) i zakończenie. Wstęp powinien liczyć 3-5 zdań, a zakończenie 2-4 zdania z podsumowaniem efektów.
+*   **Styl i język**: Używaj **neutralnego, formalnego stylu** z czasownikami opisującymi działanie (np. *odbyło się*, *przeprowadzono*). Unikaj potoczności, metafor i mieszania faktów z subiektywnymi opiniami bez potwierdzenia liczbami.
+*   **Formatowanie**: Zalecana czcionka to **Times New Roman 12 pt** lub **Arial 11 pt**, interlinia **1,5**, marginesy **2,5 cm**. Data zapisuj w formacie **dd.mm.rrrr r.**, a pełne nazwy instytucji wypisuj w całości.
+*   **Treść**: Sprawozdanie musi być **zwięzłe** i czytelne. Nawiązuj do wcześniejszych wydarzeń tylko w sprawozdaniach cyklicznych. Zawsze weryfikuj poprawność ortograficzną i interpunkcyjną.
+
+umieć pokazać u siebie tworzenie repozytorium, podłączenie konsoli, robienie z kimś i złożenie tych projektów
+za 2 tygodnie dokument gif
+za 1 tydzień we wtorek 20 października mysql php myadmin moodle
+konsolowe, konfiguracja xampp, usługi porty uprawnienia pliki konfiuracyjne, wszystko co jeszcze było omawiane
+
+backup baz danych
+1. /kopia bazy (plik binarny)
+2. export do SQL
+za miesiąc access
+300 rekordów jest i dorzucić 5
+zrobić backup czyli export sql całej bazy
+backup całej bazy bez polecenia
+mysqldump to narzędzie wiersza poleceń służące do tworzenia kopii zapasowych (zrzutów) baz danych MySQL w formacie SQL. Polecenie wymaga podania danych uwierzytelniających oraz nazwy bazy danych, a wynik jest przekierowywany do pliku. 
+
+Oto podstawowe przykłady użycia:
+
+Zrzut pojedynczej bazy danych:
+mysqldump -u [nazwa_użytkownika] -p [nazwa_bazy] > plik_z_baza.sql
+
+Zrzut wielu baz danych:
+mysqldump -u [nazwa_użytkownika] -p --databases [baza1] [baza2] > plik_wielu_baz.sql
+
+Zrzut wszystkich baz danych:
+mysqldump -u [nazwa_użytkownika] -p --all-databases > plik_wszystkich_baz.sql
+
+Zrzut konkretnej tabeli:
+mysqldump -u [nazwa_użytkownika] -p [nazwa_bazy] [nazwa_tabeli] > plik_tabeli.sql
+
+Aby przywrócić bazę danych z utworzonego pliku, użyj polecenia mysql:
+
+mysql -u [nazwa_użytkownika] -p [nazwa_bazy] < plik_z_baza.sql
+
+Dla dużych baz danych zaleca się kompresję za pomocą gzip (np. mysqldump -u user -p db | gzip > backup.sql.gz), a dla spójności transakcyjnej w InnoDB opcję --single-transaction. Hasło można podać bezpośrednio po przełączniku -p bez spacji (np. -phaslo) lub zostawić puste, aby system poprosił o wprowadzenie hasła interaktywnie. 
+
+w cmd
+winget list
+winget update i może być 7zip.7zip
+winget search
+poczytać o winget
+signal, faststone, krita
+
+WinGet to oficjalny menedżer pakietów Microsoftu dla systemu Windows, umożliwiający szybkie instalowanie, aktualizowanie i usuwanie oprogramowania z poziomu terminala.  Jest on domyślnie wbudowany w nowoczesne wersje Windows 10 i 11. 
+
+Aby korzystać z narzędzia, otwórz PowerShell lub Terminal Windows i użyj poniższych podstawowych poleceń:
+
+Wyszukiwanie: winget search <nazwa_programu> – wyszukuje aplikacje w repozytorium. 
+Instalacja: winget install <ID_programu> – instaluje wybrany program (np. winget install Mozilla.Firefox). 
+Aktualizacja: winget upgrade --all – aktualizuje wszystkie zainstalowane aplikacje do najnowszych wersji. 
+Lista: winget list – wyświetla wszystkie pakiety wykryte przez WinGet. 
+Odinstalowanie: winget uninstall <ID_programu> – usuwa wybrany program. 
+Większość instalacji można przeprowadzić w trybie cichym, dodając parametr --silent lub -e, co jest przydatne przy automatyzacji procesów. 
+
+Polecenie winget install służy do instalacji aplikacji w systemie Windows przy użyciu Windows Package Manager.  Jego podstawowa składnia to winget install <nazwa_pakietu>, gdzie <nazwa_pakietu> może być identyfikatorem (np. Microsoft.PowerToys) lub nazwą wyszukiwaną.
+
+Główne opcje i zastosowania
+Instalacja pojedyncza: winget install Mozilla.Firefox instaluje konkretną aplikację. 
+Wymuszenie źródła: winget install --id Microsoft.VisualStudioCode -e --source winget używa dokładnego dopasowania i wskazuje repozytorium.
+Tryb bezobsługowy: Dodanie flagi --silent (lub -s) minimalizuje interakcję z użytkownikiem, co jest kluczowe dla skryptów automatyzujących. 
+Niestandardowe przełączniki: Opcja --override pozwala przekazać parametry bezpośrednio do instalatora, np. winget install --id Microsoft.VisualStudio.Community --override "--quiet". 
+Wersja: Możesz zainstalować konkretną wersję, używając --version, np. winget install powertoys --version 0.91.1. 
+Wiele pakietów: W jednym poleceniu można zainstalować wiele aplikacji, podając ich identyfikatory oddzielone spacją, np. winget install Microsoft.VisualStudioCode Git.Git. 
+Przydatne komendy powiązane
+Aby znaleźć poprawny identyfikator aplikacji przed instalacją, użyj winget search <nazwa>. Po instalacji możliwe jest zarządzanie pakietami za pomocą poleceń takich jak winget upgrade --all (aktualizacja wszystkich) czy winget uninstall <nazwa> (odinstalowanie). 

@@ -162,3 +162,25 @@ Wersja: Możesz zainstalować konkretną wersję, używając --version, np. wing
 Wiele pakietów: W jednym poleceniu można zainstalować wiele aplikacji, podając ich identyfikatory oddzielone spacją, np. winget install Microsoft.VisualStudioCode Git.Git. 
 Przydatne komendy powiązane
 Aby znaleźć poprawny identyfikator aplikacji przed instalacją, użyj winget search <nazwa>. Po instalacji możliwe jest zarządzanie pakietami za pomocą poleceń takich jak winget upgrade --all (aktualizacja wszystkich) czy winget uninstall <nazwa> (odinstalowanie). 
+UNIGET UI
+
+Chocolatey to menedżer pakietów z otwartym kodem źródłowym dla systemu Windows, który działa podobnie do apt w Linuxie lub Homebrew na macOS.  Służy do automatycznej instalacji, aktualizacji i zarządzania oprogramowaniem za pomocą wiersza poleceń, co znacząco upraszcza konfigurację środowisk developerskich i administrację serwerami. 
+
+Kluczowe cechy Chocolatey to:
+
+Baza pakietów: Posiada jedno z największych repozytoriów pakietów dla Windows, zawierające ponad 10 000 gotowych do pobrania aplikacji i narzędzi. 
+Automatyzacja: Pozwala na instalację wielu programów jednocześnie jednym poleceniem (np. choco install git vscode -y), co jest kluczowe dla DevOps i wdrażania infrastruktury.
+Integracja: Działa w oparciu o PowerShell i NuGet, a pakiety mogą być tworzone z instalatorów, plików ZIP czy skryptów.
+Wymagania: Wymaga uprawnień administratora dla standardowej instalacji oraz zainstalowanego .NET Framework 4.8+. 
+Aby zainstalować Chocolatey, należy uruchomić PowerShell jako administrator i wykonać oficjalne polecenie:
+
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+Po instalacji narzędzie jest dostępne pod skrótem choco lub chocolatey. 
+
+bazy można enkryptować binarnie jak i odwrotnie
+
+balena etcher, figma agent, epson, calibre, jetbrains rider, mongoDB, node.js, revo, shareX,spacedesk windows,winmerge, airlivedrive
+
+w domu wlozyc kolumne ze zdjeciem do jednego lub dwoch php my admin, export do sql a potem i przed i po zdjeciu porownac baze
+backup mysql dump poleceniem w shellu xampp zrobic

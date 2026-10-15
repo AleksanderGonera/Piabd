@@ -183,6 +183,16 @@ bazy można enkryptować binarnie jak i odwrotnie
 balena etcher, figma agent, epson, calibre, jetbrains rider, mongoDB, node.js, revo, shareX,spacedesk windows,winmerge, airlivedrive
 
 w domu wlozyc kolumne ze zdjeciem do jednego lub dwoch php my admin, export do sql a potem i przed i po zdjeciu porownac baze
-backup mysql dump poleceniem w shellu xampp zrobic
+backup mysql dump poleceniem w shellu xampp zrobic i zdjecie ma byc
 
 INSERT INTO `uczniowie` (`id`, `nazwisko`, `imie`, `data_urodzenia`, `miejscowosc`, `kod_pocztowy`, `email`, `telefon`, `hobby`) VALUES (NULL, 'Lis', 'Piotr', '1980', 'Warszawa', '00-000', 'piotrlis@uczen.pl', '123 456 789', 'programowanie'), (NULL, 'Jantar', 'Marian', '2000', 'Warszawa', '00-000', 'marianjantar@uczen.pl', '123-564-789', 'wędkarstwo');
+
+media type - image/png
+transformacja wyjściowa - image upload (image
+browser display transformation -  inline (image/png
+
+export szybko format sql lub pdf
+alter table adresy
+modify id
+values mozna puste czyli '...'
+mysqldump -u root -p 4bgr1.adresy > backup.sql;   (>e:\roman\wynik.sql [to jest dłuższa])

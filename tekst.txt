@@ -187,12 +187,16 @@ backup mysql dump poleceniem w shellu xampp zrobic i zdjecie ma byc
 
 INSERT INTO `uczniowie` (`id`, `nazwisko`, `imie`, `data_urodzenia`, `miejscowosc`, `kod_pocztowy`, `email`, `telefon`, `hobby`) VALUES (NULL, 'Lis', 'Piotr', '1980', 'Warszawa', '00-000', 'piotrlis@uczen.pl', '123 456 789', 'programowanie'), (NULL, 'Jantar', 'Marian', '2000', 'Warszawa', '00-000', 'marianjantar@uczen.pl', '123-564-789', 'wędkarstwo');
 
-media type - image/png
-transformacja wyjściowa - image upload (image
-browser display transformation -  inline (image/png
 
+typ ma być blob, jeżeli wstawiasz varchar to w media zmieniasz na text/plain a browser na image link
+media type - image/png
+transformacja wyjściowa - image upload (image/png
+browser display transformation -  inline (image/png
+w tym png zamiast może być jpeg
 export szybko format sql lub pdf
 alter table adresy
 modify id
 values mozna puste czyli '...'
-mysqldump -u root -p 4bgr1.adresy > backup.sql;   (>e:\roman\wynik.sql [to jest dłuższa])
+mysqldump -u root -p 4bgr1.uczniowie > backup.sql;   (>e:\roman\wynik.sql [to jest dłuższa])
+Aby zaimportować bazę danych do MySQL używając XAMPP, należy użyć polecenia mysql z operatorem przekierowania < (w przeciwieństwie do > używanego przy eksporcie).
+php.ini w folderze xampp/php/php.ini i zjechać do max_input_vars = 1000(?)   

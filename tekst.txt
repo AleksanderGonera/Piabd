@@ -200,3 +200,46 @@ values mozna puste czyli '...'
 mysqldump -u root -p 4bgr1.uczniowie > backup.sql;   (>e:\roman\wynik.sql [to jest dłuższa])
 Aby zaimportować bazę danych do MySQL używając XAMPP, należy użyć polecenia mysql z operatorem przekierowania < (w przeciwieństwie do > używanego przy eksporcie).
 php.ini w folderze xampp/php/php.ini i zjechać do max_input_vars = 1000(?)   
+
+
+id nazwisko imie zdjecie i do kazdego nazwiska zdjecie chatem gpt 600x600 pikseli i link do strony losowej i exportować tą tabelę do pdf, sql, zip
+
+W phpMyAdmin INT służy do przechowywania liczb całkowitych (np.  -2147483648 do 2147483647), podczas gdy VARCHAR jest używany do tekstu o zmiennej długości (do 65 535 znaków).
+
+INSERT INTO `klasa` (`id`, `nazwisko`, `imie`, `zdjecie`, `link`) VALUES ('3', 'Skulimowski', 'Kamil', '', 'http://www.example.com/Music');
+
+Brak przycisku **Edytuj** (oraz Kopiuj/Usuń) przy rekordach w phpMyAdmin oznacza, że Twoja tabela **nie ma klucza głównego (PRIMARY KEY) ani kolumny unikalnej (UNIQUE)**. Bez unikalnego identyfikatora phpMyAdmin nie wie, który dokładnie wiersz edytować, więc ukrywa te przyciski.
+
+**Rozwiązanie – dodaj kolumnę PRIMARY KEY:**
+
+1. Wejdź w tabelę → zakładka **Struktura** (Structure).
+2. Na dole strony kliknij **Dodaj kolumny** (np. 1).
+3. Ustaw:
+   - **Nazwa:** `id`
+   - **Typ:** `INT`
+   - **Atrybuty:** `unsigned`
+   - **Domyślnie:** (puste)
+   - Zaznacz **PRIMARY** i **A_I** (Auto Increment)
+4. Kliknij **Wykonaj** (Go).
+
+Po dodaniu klucza głównego przyciski **Edytuj**, **Kopiuj** i **Usuń** pojawią się przy każdym rekordzie w zakładce **Zbadać** (Browse).
+
+**Alternatywa (jeśli nie możesz zmienić struktury):** W pliku `config.inc.php` phpMyAdmin ustaw:
+```php
+$cfg['RowActionLinksWithoutUnique'] = true;
+```
+i zrestartuj serwer – ale jest to rozwiązanie mniej bezpieczne, bo aktualizacja może dotknąć wiele wierszy naraz.
+
+**Nie da się** zrobić klikalnego linku do dowolnego URL bezpośrednio w widoku przeglądania tabeli w phpMyAdmin — MySQL przechowuje zwykły tekst, a phpMyAdmin ucieka znaki HTML, więc `<a>` nie zadziała.
+
+Jedyne "klikalne linki" w phpMyAdmin to **klucze obce** między tabelami (ustawiane przez *Struktura → Widok relacji*).
+
+Aby mieć klikalny link, musisz wygenerować go w **aplikacji PHP** wyświetlającej dane z bazy:
+
+```php
+echo '<a href="' . htmlspecialchars($row['url']) . '">' . htmlspecialchars($row['url']) . '</a>';
+```
+
+To jest standardowy sposób — baza przechowuje sam tekst URL, a warstwa prezentacji (HTML) zamienia go w link.
+
+vampserver

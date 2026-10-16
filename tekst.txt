@@ -243,3 +243,140 @@ echo '<a href="' . htmlspecialchars($row['url']) . '">' . htmlspecialchars($row[
 To jest standardowy sposób — baza przechowuje sam tekst URL, a warstwa prezentacji (HTML) zamienia go w link.
 
 vampserver
+
+Z listy, którą podałem, **realnie działające** (rozwijają się w przeglądarce i serwują stronę IANA) są tylko trzy:
+
+- `http://example.com`
+- `http://example.net`
+- `http://example.org`
+
+Każdy z nich wyświetla prostą stronę z informacją, że domena jest zarezerwowana, z linkiem do IANA.
+
+**Reszta NIE działa w globalnym DNS:**
+
+| Domena | Co się stanie |
+|---|---|
+| `*.example` (np. `acme.example`) | NXDOMAIN – nie jest delegowany w strefie root |
+| `*.test` | NXDOMAIN – nie istnieje w publicznym DNS |
+| `*.invalid` | Gwarantowany NXDOMAIN (celowo) |
+| `*.localhost` | Rozwija się do `127.0.0.1`, ale nic nie serwuje bez lokalnego serwera |
+| `example.edu` | Wymieniany w niektórych źródłach, ale **nie figuruje** w oficjalnej liście IANA (RFC 2606) – nie gwarantuje działania |
+| `example.aero`, `example.jp` itp. | Niepotwierdzone – nie ma ich w RFC 2606 jako działających |
+
+**Podsumowanie:** jeśli potrzebujesz linku, który faktycznie otworzy się w przeglądarce – używaj `http://example.com`, `http://example.net` lub `http://example.org`.
+
+jak rozwiązać zniknięcie wyboru przy blob m.in. media type (?)
+
+\Aby wkleić lub dodać zdjęcie do kolumny w phpMyAdmin, należy zazwyczaj zapisać plik graficzny na serwerze, a w bazie danych przechowywać jedynie **ścieżkę dostępu** (URL) do tego pliku.
+
+Proces wykonania tej operacji wygląda następująco:
+
+1.  **Przechowywanie pliku**: Zapisz zdjęcie w odpowiednim katalogu na serwerze (np. w folderze `img` lub `uploads`).
+2.  **Edycja rekordu**: W phpMyAdmin wybierz tabelę i kliknij przycisk **Edytuj** przy odpowiednim rekordzie.
+3.  **Wpisanie ścieżki**: Do kolumny przeznaczonej na zdjęcie (zazwyczaj typu `VARCHAR` lub `TEXT`) wpisz **ścieżkę dostępu** do pliku, np. `/img/zdjecie.jpg`.
+4.  **Alternatywa (dane binarne)**: Jeśli kolumna ma typ `BLOB` lub `LONGBLOB`, przy edycji rekordu możesz użyć przycisku **Przeglądaj** (Browse), aby wgrać plik bezpośrednio do bazy danych jako dane binarne.
+
+**Ważne**: Przechowywanie ścieżek URL jest bardziej zalecaną i wydajną metodą niż zapisywanie obrazów jako danych binarnych w tabeli.
+
+Brak przycisku **Edytuj** (oraz Kopiuj/Usuń) przy rekordach w phpMyAdmin oznacza, że Twoja tabela **nie ma klucza głównego (PRIMARY KEY) ani kolumny unikalnej (UNIQUE)**. Bez unikalnego identyfikatora phpMyAdmin nie wie, który dokładnie wiersz edytować, więc ukrywa te przyciski.
+
+**Rozwiązanie – dodaj kolumnę PRIMARY KEY:**
+
+1. Wejdź w tabelę → zakładka **Struktura** (Structure).
+2. Na dole strony kliknij **Dodaj kolumny** (np. 1).
+3. Ustaw:
+   - **Nazwa:** `id`
+   - **Typ:** `INT`
+   - **Atrybuty:** `unsigned`
+   - **Domyślnie:** (puste)
+   - Zaznacz **PRIMARY** i **A_I** (Auto Increment)
+4. Kliknij **Wykonaj** (Go).
+
+Po dodaniu klucza głównego przyciski **Edytuj**, **Kopiuj** i **Usuń** pojawią się przy każdym rekordzie w zakładce **Zbadać** (Browse).
+
+**Alternatywa (jeśli nie możesz zmienić struktury):** W pliku `config.inc.php` phpMyAdmin ustaw:
+```php
+$cfg['RowActionLinksWithoutUnique'] = true;
+```
+i zrestartuj serwer – ale jest to rozwiązanie mniej bezpieczne, bo aktualizacja może dotknąć wiele wierszy naraz.
+
+**Winamp nie ma żadnego domyślnego hasła** – to zwykły odtwarzacz multimedialny, który nie wymaga logowania i nie posiada konta administratora ani hasła do otwarcia programu.
+
+Jeśli masz na myśli coś innego, to prawdopodobnie chodzi o:
+- **Wtyczkę SHOUTcast DSP** (do nadawania na żywo) – tam hasło źródłowe (source password) i hasło konta DJa ustawiasz samodzielnie w panelu radiohost, nie ma wartości domyślnej.
+- **Błąd instalacji** „Ta aplikacja została zablokowana w celu ochrony" – to komunikat systemu Windows (UAC), nie hasło; wynika m.in. z unieważnionego certyfikatu podpisu instalatora, a nie z braku hasła.
+
+Daj znać, o które z tych haseł dokładnie pytasz, a doprecyzuję.
+
+Aby wyeksportować tabelę z **phpMyAdmin** do formatu **ZIP**, wykonaj następujące kroki:
+
+1. Zaloguj się do **phpMyAdmin** i wybierz bazę danych, a następnie konkretną **tabelę** z listy po lewej stronie.
+2. Kliknij zakładkę **Eksport** w górnym menu.
+3. Wybierz metodę eksportu **Dostosuj** (Custom), aby uzyskać dostęp do wszystkich opcji.
+4. W sekcji dotyczącej formatu pliku (często w podsekcji "Wynik" lub "Pakiet") zaznacz opcję kompresji, wybierając **zip** (lub **gz**).
+5. Kliknij przycisk **Wykonaj** (lub **Go**), aby pobrać spakowany plik z tabelą na swój komputer.
+
+Uwaga: Wykorzystanie kompresji **zip** może zmniejszyć czas przesyłania, ale przy bardzo dużych tabelach może przekroczyć limit pamięci serwera, co uniemożliwi eksport.
+
+To są **dwa niezależne ustawienia** — nie musisz zmieniać formatu na "zip":
+
+- **Format** (na górze) — zostaw na **SQL**. To definiuje, w jakim formacie będą dane.
+- **Kompresja** (w sekcji **Wynik / Output**, niżej na stronie) — tu wybierasz **zip**.
+
+Czyli: Format = **SQL** + Kompresja = **zipped** → dostajesz plik `.sql.zip`.
+
+Jeśli nie widzisz opcji kompresji, upewnij się, że:
+1. Wybrałeś metodę eksportu **Dostosuj** (Custom), a nie "Szybko" (Quick).
+2. W sekcji **Wynik** zaznaczasz **Zapisz wynik do pliku** (Save output to file) — dopiero wtedy pojawia się dropdown kompresji.
+
+Najczęstsza przyczyna: **typ kolumny jest za mały**.
+
+| Typ kolumny | Maks. rozmiar |
+|---|---|
+| `BLOB` | **64 KB** |
+| `MEDIUMBLOB` | 16 MB |
+| `LONGBLOB` | 4 GB |
+
+Jeśli Twoja kolumna to zwykły `BLOB`, obraz 2 MB zostanie **przetnięty** do 64 KB — stąd nie wyświetla się poprawnie.
+
+**Naprawa:** zmień typ kolumny na `MEDIUMBLOB` (wystarczy dla 2 MB):
+
+```sql
+ALTER TABLE twoja_tabela MODIFY kolumna_zdjecia MEDIUMBLOB;
+```
+
+---
+
+Jeśli kolumna jest już `MEDIUMBLOB`/`LONGBLOB`, sprawdź jeszcze:
+
+1. **`php.ini`** — `upload_max_filesize` i `post_max_size` muszą być ≥ 2M (domyślnie często 2M, co oznacza że dokładnie 2 MB może nie przejść).
+2. **`max_allowed_packet`** w MySQL — sprawdź:
+   ```sql
+   SHOW VARIABLES LIKE 'max_allowed_packet';
+   ```
+   Powinien być ≥ 4M.
+3. **Wyświetlanie** — jeśli dane są w bazie poprawnie, ale obraz nie renderuje się na stronie, upewnij się że w PHP:
+   - nie ma `addslashes()` na danych binarnych (zniszcza obraz),
+   - `header('Content-Type: image/jpeg');` jest wywołane **przed** jakimkolwiek outputem (spacje, BOM),
+   - używasz `file_get_contents($_FILES['zdjecie']['tmp_name'])`, a nie ścieżki jako wartości.
+
+gdzie w php.ini xampp jest rozwiązanie problemu #1153 - Got a packet bigger than 'max_allowed_packet' bytes
+
+Błąd **#1153** jest ograniczeniem po stronie serwera **MySQL/MariaDB**, a nie PHP, więc nie rozwiązuje się go w pliku `php.ini` XAMPP.
+
+Aby rozwiązać problem w XAMPP, należy zmodyfikować plik konfiguracyjny bazy danych:
+
+1.  Otwórz plik **`my.ini`** znajdujący się w katalogu:
+    `C:\xampp\mysql\bin\my.ini` (lub `/opt/lampp/etc/my.cnf` na Linuxie).
+2.  Znajdź sekcję **[mysqld]**.
+3.  Dodaj lub zmień wartość parametru:
+    ```ini
+    max_allowed_packet=256M
+    ```
+4.  Zapisz plik i **zrestartuj** usługę MySQL z panelu XAMPP.
+
+Jeśli importujesz bazę przez narzędzie takie jak **phpMyAdmin**, może również wystąpić konflikt z limitami PHP. W takim przypadku w pliku `php.ini` XAMPP (`C:\xampp\php\php.ini`) zwiększ wartości:
+*   `upload_max_filesize = 256M`
+*   `post_max_size = 256M`
+
+Po zmianach w `php.ini` konieczny jest restart usługi **Apache**.

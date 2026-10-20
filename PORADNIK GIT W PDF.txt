@@ -1,1 +1,20 @@
-ZRÓB NA 27.10.2026 wtorek 
+ZRÓB NA 29.10.2026 czwartek
+ma być zrozumiale zeby kazdy wiedzial
+codespace i serwer www z bazą danych
+jak pracowac
+jak dziala wszystko
+pokazac za pomoca screenow
+obrazek nie skalowac
+word
+obsluga git i github
+kto wykonal
+numery stron
+spis tresci
+obrazki wklejac i podpisac je np. Rysunek 1. ...
+wstaw podpis opcja w word
+lewy alt i prt screen klikniete myszka na tym dziala
+linki do zrodel
+zadanie 1 nagłówek 2 bo 1 do tytułu
+spis tresci pokaz poziomy do 2
+aktalizuj pole poprawia numeracje
+screeny z gita i githuba z naszego konta

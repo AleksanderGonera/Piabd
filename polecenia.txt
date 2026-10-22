@@ -1,9 +1,13 @@
 tematyka pytania i do niej odpowiedzi
 1. wyswietl uczniow mieszkajcacych w lodzi
+SELECT * FROM uczniowie where miejscowosc = 'łódź'
 2. wyswietl uczniow mieszkajacych w lodzi i hobby
+SELECT * FROM uczniowie where miejscowosc = 'łódź' and hobby = 'programowanie';
 3. wyswietl
+SELECT * FROM uczniowie where miejscowosc = 'łódź' or miejscowosc = 'warszawa'
 4.
-
+SELECT * FROM uczniowie where miejscowosc in ('łódź', 'warszawa', 'kraków');
+SELECT * FROM uczniowie where miejscowosc in ('łódź', 'warszawa', 'kraków') ORDER BY miejscowosc ASC;
 5.
 SELECT imie,nazwisko, miejscowosc FROM 'uczniowie' where miejscowosc NOT IN ('łódź', 'warszawa', 'kraków');
 6.
@@ -26,5 +30,5 @@ FROM uczniowie;
 23. wyswietl uczniow urodzonych w czerwcu
 SELECT imie, nazwisko, data_urodzenia
 FROM uczniowie
-WHERE MONTH(data_urodzenia) = 6
-ORDER BY data_urodzenia;
+WHERE MONTH(data_urodzenia) = 6    funkcja wbudowana które pozwalają wyselekcjonować angielskie nazwy funkcji
+ORDER BY data_urodzenia;     domyślnie rosnąco czyli ASC

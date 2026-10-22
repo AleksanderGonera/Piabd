@@ -58,3 +58,93 @@ CURDATE()	  DATE (format YYYY-MM-DD w kontekście stringowym, YYYYMMDD jako BIGI
 SELECT imie, nazwisko, email
 FROM uczniowie
 WHERE email LIKE '%kowalski%';
+
+28. Wyświetl najstarszego i najmłodszego ucznia według daty urodzenia (same daty)
+SELECT MIN (data_urodzenia) AS najstarszy,
+       MAX (data_urodzenia) AS najmłodszy
+FROM uczniowie;
+
+29. Wyświetl uczniów mieszkających w najliczniej reprezentowanej miejscowości
+SELECT imie, nazwisko, miejscowosc
+FROM uczniowie
+WHERE miejscowosc  = (
+    SELECT miejscowosc
+    FROM uczniowie
+    GROUP BY miejscowosc
+    ORDER BY COUNT(*) DESC, miejscowosc ASC
+    LIMIT 1
+)
+ORDER BY nazwisko, imie;
+
+30. Wyświetl uczniów, którzy mają takie samo imię jak co najmniej jedna inna osoba
+SELECT id, imie, nazwisko
+FROM uczniowie
+WHERE imie IN (
+    SELECT imie
+    FROM uczniowie
+    GROUP BY imie 
+    HAVING COUNT(*) > 1
+
+31. Wyświetl uczniów, których imię ma dokładnie 5 liter
+SELECT id, imie, nazwisko
+FROM uczniowie
+WHERE CHAR_LENGTH(imie) = 5
+ORDER BY imie;
+
+32. Wyświetl trzy ostatnie cyfry numeru telefonu każdego ucznia
+SELECT imie, nazwisko,
+       RIGHT(telefon, 3) AS koncowka_telefonu
+FROM uczniowie
+ORDER BY nazwisko;
+
+33. Wyświetl nazwiska uczniów zapisane małymi literami
+SELECT imie,
+       LOWER(nazwisko) AS nazwisko_male_litery
+FROM uczniowie;
+
+34. Wyświetl uczniów urodzonych w pierwszym kwartale roku
+SELECT imie, nazwisko, data_urodzenia
+FROM uczniowie
+WHERE MONTH(data_urodzenia) BETWEEN 1 AND 3
+ORDER BY data_urodzenia;
+
+
+=============
+jakie funkcje w sql operują na tekście
+W SQL funkcje operujące na tekście służą do **modyfikacji, ekstrakcji, łączenia i analizy** ciągów znaków. Do najważniejszych należą:
+
+*   **UPPER() / LOWER()**: Zmiana wielkości liter (na wielkie lub małe).
+*   **SUBSTRING() / LEFT() / RIGHT()**: Wyodrębnianie fragmentów tekstu (od początku, końca lub określonej pozycji).
+*   **REPLACE()**: Podmiana jednego podciągu na inny.
+*   **CHARINDEX() / PATINDEX()**: Wyszukiwanie pozycji wystąpienia podciągu lub wzorca.
+*   **LEN() / DATALENGTH()**: Zwracanie liczby znaków lub bajtów.
+*   **CONCAT() / CONCAT_WS()**: Łączenie wielu tekstów w jeden (z opcjonalnym separatorem).
+*   **TRIM() / LTRIM() / RTRIM()**: Usuwanie spacji z lewej, prawej lub obu stron.
+*   **STUFF()**: Usuwanie i wstawianie fragmentu tekstu w określonym miejscu.
+*   **REPLICATE()**: Powielanie ciągu znaków określoną liczbę razy.
+
+Składnia i dostępność niektórych funkcji (np. `CONCAT_WS`, `STRING_AGG`) może się różnić w zależności od systemu zarządzania bazą danych (MS SQL Server, MySQL, PostgreSQL).
+
+
+różnice pomiędzy char length a length w sql
+
+**LENGTH** i **CHAR_LENGTH** różnią się jednostką pomiaru długości tekstu: **LENGTH** zwraca liczbę **bajtów**, a **CHAR_LENGTH** liczbę **znaków**.
+
+W przypadku czysto ASCII oba zwracają ten sam wynik, ale w kodowaniach wielobajtowych (np. UTF-8) różnią się, ponieważ jeden znak może zajmować więcej niż jeden bajt. Poniżej przedstawiono kluczowe różnice w zależności od systemu:
+
+| System | LENGTH | CHAR_LENGTH | Uwagi |
+| :--- | :--- | :--- | :--- |
+| **MySQL** | Liczy **bajty** | Liczy **znaki** | Długości się różnią dla Unicode/Emoji. |
+| **PostgreSQL** | Liczy **znaki** | Liczy **znaki** | Dla bajtów należy użyć `OCTET_LENGTH()`. |
+| **SQL Server** | Brak funkcji `LENGTH` | Brak funkcji `CHAR_LENGTH` | Należy użyć `LEN()` (znaki) i `DATALENGTH()` (bajty). |
+
+**Kiedy używać której funkcji?**
+*   Użyj **CHAR_LENGTH**, gdy chcesz sprawdzić limit znaków dla użytkownika (np. walidacja formularza) lub wyświetlić liczbę znaków w interfejsie.
+*   Użyj **LENGTH** (lub odpowiednika bajtowego), gdy analizujesz zużycie miejsca w bazie danych, optymalizujesz rozmiary kolumn `VARCHAR` lub pracujesz z danymi binarnymi.
+
+Przykład różnicy w MySQL dla znaku euro (€):
+```sql
+SELECT LENGTH('€') AS bajty, CHAR_LENGTH('€') AS znaki;
+-- Wynik: 3 bajty, 1 znak
+```
+================

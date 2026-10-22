@@ -30,5 +30,31 @@ FROM uczniowie;
 23. wyswietl uczniow urodzonych w czerwcu
 SELECT imie, nazwisko, data_urodzenia
 FROM uczniowie
-WHERE MONTH(data_urodzenia) = 6    funkcja wbudowana które pozwalają wyselekcjonować angielskie nazwy funkcji
-ORDER BY data_urodzenia;     domyślnie rosnąco czyli ASC
+WHERE MONTH(data_urodzenia) = 6          funkcja wbudowana które pozwalają wyselekcjonować angielskie nazwy funkcji
+ORDER BY data_urodzenia;                 domyślnie rosnąco czyli ASC
+
+w czerwcu i grudniu
+and
+w cz lub gr
+or
+
+24. Oblicz wiek każdego ucznia
+SELECT imie, 
+       nazwisko
+       data_urodzenia
+       TIMESTAMPDIFF(
+           YEAR,
+           data_urodzenia,
+           CURDATE()
+       ) AS wiek
+FROM uczniowie
+ORDER BY wiek DESC;
+
+Funkcja	  Typ zwracany
+TIMESTAMPDIFF	  BIGINT (liczba całkowita ze znakiem)
+CURDATE()	  DATE (format YYYY-MM-DD w kontekście stringowym, YYYYMMDD jako BIGINT w kontekście numerycznym)
+
+25. Wyświetl uczniów, których adres e-mail zawiera nazwisko "kowalski"
+SELECT imie, nazwisko, email
+FROM uczniowie
+WHERE email LIKE '%kowalski%';

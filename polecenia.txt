@@ -1,0 +1,30 @@
+tematyka pytania i do niej odpowiedzi
+1. wyswietl uczniow mieszkajcacych w lodzi
+2. wyswietl uczniow mieszkajacych w lodzi i hobby
+3. wyswietl
+4.
+
+5.
+SELECT imie,nazwisko, miejscowosc FROM 'uczniowie' where miejscowosc NOT IN ('łódź', 'warszawa', 'kraków');
+6.
+SELECT * FROM uczniowie where nazwisko like 'K%'
+7.
+SELECT * FROM 'uczniowie' where data_urodzenia BETWEEN '2007-01-1' and '2008-12-31';
+8. wyswietl wszystkie miejscowosci bez powtorzen
+SELECT DISTINCT miejscowosc FROM 'uczniowie';
+9. policz wszystkich uczniow z lodzi
+SELECT COUNT(*) as chłopaki FROM uczniowie WHERE miejscowosc = "Łódź"
+21. wyswietl imie i nazwisko ucznia w jednej kolumnie
+SELECT id,
+       CONCAT(imie, ' ', nazwisko) AS uczen
+FROM uczniowie;
+22. wyswietl imiona uczniow wielkimi literami
+SELECT id,
+       UPPER(imie) AS imie_duzymi_literami,
+       nazwisko
+FROM uczniowie;
+23. wyswietl uczniow urodzonych w czerwcu
+SELECT imie, nazwisko, data_urodzenia
+FROM uczniowie
+WHERE MONTH(data_urodzenia) = 6
+ORDER BY data_urodzenia;

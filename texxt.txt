@@ -1,1 +1,13 @@
 github.com/holubowicz
+Chr1skyy
+Technikum-TEB-Edukacja-we-Wrocławiu
+inf 03 github
+
+ĆW 1
+id imie pesel telefon
+5 rekord
+notepad++ csv nagłówek znak rozdzielajacy srednik
+import do excel a format excel do bazy .utf8bezbump
+dopisać spod excel
+xlsx nie csv potem
+z pliku excel

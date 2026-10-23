@@ -100,6 +100,8 @@ ORDER BY nazwisko;
 RIGHT czyli od prawej licząc
 3 to wyszukiwanie po 3 pierwszych literach
 
+SELECT COUNT(*) AS liczba_osob FROM uczniowie where telefon like "502%";
+
 33. Wyświetl nazwiska uczniów zapisane małymi literami
 SELECT imie,
        LOWER(nazwisko) AS nazwisko_male_litery
@@ -110,7 +112,6 @@ SELECT imie, nazwisko, data_urodzenia
 FROM uczniowie
 WHERE MONTH(data_urodzenia) BETWEEN 1 AND 3
 ORDER BY data_urodzenia;
-
 
 
 

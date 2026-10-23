@@ -11,3 +11,65 @@ import do excel a format excel do bazy .utf8bezbump
 dopisać spod excel
 xlsx nie csv potem
 z pliku excel
+
+xlsx nie da się przenieść na bazę ale przy csv zaznaczasz na samym dole Pierwsza linia pliku zawiera nazwy kolumn (jeśli wyłączone, pierwsza linia będzie częścią danych)
+
+
+
+
+zrób bazę danych w notepad++ która nazywa się ćwiczenie 1 i ma tabele id imie pesel telefon i ma być 5 rekordów, potem import do excel a potem format excel xlsx do bazy danych phpmyadmin utf8 bez dump
+
+Nie mogę wykonać tego zadania w całości, ponieważ **Notepad++ to edytor tekstu i nie tworzy natywnie plików bazodanowych** ani nie obsługuje eksportu do formatu Excela (.xlsx) w sposób, który można bezpośrednio zaimportować do phpMyAdmin jako strukturę tabeli z danymi bez użycia intermediate formatu (np. CSV/SQL). Ponadto, **phpMyAdmin działa na bazach danych MySQL/MariaDB**, a pliki Excela (.xlsx) nie są standardowym źródłem importu dla struktury tabeli bez konwersji.
+
+Poniżej przedstawiam **poprawny, krok po kroku, workflow** spełniający Twoje wymagania technicznie poprawnie:
+
+### 1. Utworzenie danych w Notepad++ (jako CSV)
+Otwórz Notepad++, wpisz dane w formacie CSV (przecinek jako separator), zapisz plik jako `cwiczenie1.csv` (kodowanie **UTF-8**):
+
+```csv
+id,imie,pesel,telefon
+1,Jan,Kowalski,12345678901,123456789
+2,Anna,Nowak,98765432109,987654321
+3,Piotr,Zieliński,11223344556,111222333
+4,Maria,Wójcik,55667788990,444555666
+5,Tomasz,Lewandowski,99887766554,777888999
+```
+
+### 2. Import do Excela i zapis jako .xlsx
+1. Otwórz **Microsoft Excel**.
+2. Wejdź w zakładkę **Dane** > **Z tekstu/katalogu** (lub *Z pliku tekstowego*) i wybierz plik `cwiczenie1.csv`.
+3. Postępuj kreatorem importu (upewnij się, że separator to przecinek).
+4. Po załadowaniu danych, kliknij **Plik** > **Zapisz jako** > wybierz typ pliku **Skoroszyt programu Excel (*.xlsx)**. Zapisz jako `baza_danych.xlsx`.
+
+### 3. Konwersja do formatu SQL dla phpMyAdmin (bez dump)
+phpMyAdmin nie importuje plików .xlsx bezpośrednio do struktury tabeli z danymi w sposób "bez dump" w rozumieniu tworzenia struktury. Najczęstszą interpretacją "bez dump" jest **wrzucenie pliku SQL** zawierającego `CREATE TABLE` i `INSERT INTO`.
+
+1. W Excelu, zapisz arkusz ponownie jako **CSV UTF-8 (kompresja CSV)** lub użyj kwerendy SQL w innym narzędziu, aby wygenerować kod.
+2. Ręcznie lub narzędziem generującym SQL, stwórz plik `cwiczenie1.sql` (UTF-8) o zawartości:
+
+```sql
+CREATE TABLE IF NOT EXISTS cwiczenie1 (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    imie VARCHAR(50) NOT NULL,
+    pesel VARCHAR(11) NOT NULL,
+    telefon VARCHAR(15) DEFAULT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO cwiczenie1 (imie, pesel, telefon) VALUES
+('Jan Kowalski', '12345678901', '123456789'),
+('Anna Nowak', '98765432109', '987654321'),
+('Piotr Zieliński', '11223344556', '111222333'),
+('Maria Wójcik', '55667788990', '444555666'),
+('Tomasz Lewandowski', '99887766554', '777888999');
+```
+
+### 4. Import do phpMyAdmin
+1. Zaloguj się do **phpMyAdmin**.
+2. Wybierz bazę danych (utwórz nową, jeśli nie ma, np. `moja_baza`).
+3. Kliknij zakładkę **Importuj**.
+4. Wybierz plik `cwiczenie1.sql`.
+5. Upewnij się, że format to **SQL** i kodowanie to **utf-8**.
+6. Kliknij **Wykonaj**.
+
+**Wynik:** Zostanie utworzona tabela `cwiczenie1` z 5 rekordami, zdefiniowana z kodowaniem UTF-8, bez konieczności ręcznego wpisywania danych ani używania pliku `.sql` wygenerowanego przez "Export" (dump) z innej bazy.

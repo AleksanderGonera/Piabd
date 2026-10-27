@@ -351,3 +351,75 @@ SELECT LENGTH('€') AS bajty, CHAR_LENGTH('€') AS znaki;
 -- Wynik: 3 bajty, 1 znak
 ```
 ================
+
+
+<Window x:Class="Projekt001.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt001"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel Margin="50">
+        <TextBlock Text="Bok a:"/>
+        <TextBox x:Name="poleA" Margin="0,10,0,10" />
+        <TextBlock Text="Bok b:"/>
+        <TextBox x:Name="poleB" Margin="0,10,0,10" />
+        <Button Content="Oblicz pole prostokąta" Click="Oblicz_Click"/>
+
+        <TextBlock x:Name="poleWynik" Margin="40" />
+    </StackPanel>
+</Window>
+
+
+
+
+
+
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Projekt001
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Oblicz_Click(object sender, RoutedEventArgs e)
+        {
+            //pobieramy dane
+            double a = double.Parse(poleA.Text);
+            double b = double.Parse(poleB.Text);
+            //obliczenia
+            double wynik = a * b;
+            //wyświetl wynik
+            poleWynik.Text = wynik.ToString();
+
+        }
+    }
+}

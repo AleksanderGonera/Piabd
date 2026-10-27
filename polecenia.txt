@@ -149,6 +149,56 @@ SELECT
 w swoim katalogu zrobić katalog testy a w testach plik o nazwie skrypt 1 php 
 wstawić dowolny rekord do tabeli
 
+<?php
+//stworzenie polaczenia z baza danych
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "4bgr1";
+$poloczenie = mysqli_connect("localhost", "root", "", "4bgr1");
+// próba połączenia z bazą danych
+if (!$poloczenie) {
+    die("Błąd połączenia: " . mysqli_connect_error());
+}
+?>
+
+
+
+
+
+<?php
+//stworzenie polaczenia z baza danych
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "4bgr1";
+$poloczenie = mysqli_connect("localhost", "root", "", "4bgr1");
+// próba połączenia z bazą danych
+if (!$poloczenie) {
+    die("Błąd połączenia: " . mysqli_connect_error());
+}
+// wyświetlenie komunikatu o powodzeniu połączenia
+echo "Połączono z bazą danych";
+// zamknięcie połączenia z bazą danych
+mysqli_close($poloczenie);
+
+1. <?php
+//stworzenie połączenia z bazą danych
+mysqli_connect("localhost", "root", "", "4bgr1");
+
+?>
+
+2 <?php
+//stworzenie połączenia z bazą danych
+$connection = mysqli_connect("localhost", "root", "", "baza danych");
+(adres serwera, nazwa użytkownika, hasło użytkownika, nazwa bazy danych)
+
+?>
+
+2.5 echo "Połączenie z bazą danych zostało nawiązane."
+
+
+
 Ćw 1 napisać skrypt php strona w xampp w swoim katalogu zrobić katalog testy a w testach plik o nazwie skrypt 1 php wstawić dowolny rekord do tabeli
 
 Aby wykonać to ćwiczenie, utwórz w katalogu głównym XAMPP (zwykle `C:\xampp\htdocs`) podkatalog `testy`, a w nim plik `skrypt1.php` z kodem PHP łączącym się z bazą danych i wykonującym zapytanie `INSERT`.

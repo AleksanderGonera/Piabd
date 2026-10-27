@@ -150,7 +150,7 @@ w swoim katalogu zrobić katalog testy a w testach plik o nazwie skrypt 1 php
 wstawić dowolny rekord do tabeli
 
 <?php
-//stworzenie polaczenia z baza danych
+//stworzenie polaczenia z baza danych - proceduralna
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -159,6 +159,69 @@ $poloczenie = mysqli_connect("localhost", "root", "", "4bgr1");
 // próba połączenia z bazą danych
 if (!$poloczenie) {
     die("Błąd połączenia: " . mysqli_connect_error());
+}
+else {
+    echo "Połączenie z bazą danych zostało nawiązane O NAZWIE .$database.";
+}
+//zapytanie
+$zapytanie = INSERT INTO `users` (`id`, `name`, `email`) VALUES (NULL, 'Jan', 'jan@wp.pl');
+//wykonanie zapytania
+$wynik = mysqli_query($poloczenie, $zapytanie);
+//dwa argumenty - polaczenie i zapytanie, nie zamieniaj kolejności
+?>
+
+<?php
+//stworzenie polaczenia z baza danych - proceduralna
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "4bgr1";
+$poloczenie = mysqli_connect("localhost", "root", "", "4bgr1");
+// próba połączenia z bazą danych
+if (!$poloczenie) {
+    die("Błąd połączenia: " . mysqli_connect_error());
+}
+else {
+    echo "Połączenie z bazą danych zostało nawiązane O NAZWIE .$database.";
+}
+//zapytanie
+$zapytanie = "SELECT * FROM `uczniowie`";
+//wykonanie zapytania
+$wynik = mysqli_query($poloczenie, $zapytanie);
+//dwa argumenty - polaczenie i zapytanie, nie zamieniaj kolejności
+?>
+
+
+<?php
+//stworzenie polaczenia z baza danych - proceduralna
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "4bgr1";
+$poloczenie = mysqli_connect("localhost", "root", "", "4bgr1");
+// próba połączenia z bazą danych
+if (!$poloczenie) {
+    die("Błąd połączenia: " . mysqli_connect_error());
+}
+else {
+    echo "Połączenie z bazą danych zostało nawiązane O NAZWIE .$database.";
+}
+?>
+
+
+
+
+<?php
+//stworzenie polaczenia z baza danych - proceduralna
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "4bgr1";
+$poloczenie = mysqli_connect("localhost", "root", "", "4bgr1");
+// próba połączenia z bazą danych
+if (!$poloczenie) {
+    die("Błąd połączenia: " . mysqli_connect_error());
+    else
 }
 ?>
 

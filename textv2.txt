@@ -16,6 +16,33 @@ z pliku excel
 
 xlsx nie da się przenieść na bazę ale przy csv zaznaczasz na samym dole Pierwsza linia pliku zawiera nazwy kolumn (jeśli wyłączone, pierwsza linia będzie częścią danych)
 
+funkcje agregujące
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

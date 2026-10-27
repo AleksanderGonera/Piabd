@@ -122,10 +122,41 @@ ORDER BY nazwisko;
 
 
 
+FUNKCJE AGREGUJĄCE
+
+1. Dodaj jednego nowego ucznia, podając wszystkie kolumny, w tym identyfikator.
+INSERT INTO uczniowie_dml
+    (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby)
+VALUES
+    (1001, 'Kowalski', 'Adam', '2008-04-15', ...)
+
+2. Dodaj dwóch uczniów jednym poleceniem INSERT.
+INSERT INTO uczniowie_dml
+    (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby)
+VALUES
+    (1001, 'Kowalski', 'Adam', '2008-04-15', ...)
+    (1002, 'Nowak', 'Anna', '2008-06-20', ...)
+
+3. Dodaj ucznia bez podawania id - niech AUTO INCREMENT nada je automatycznie.
+
+4. Utwórz kopię danych ucznia o id = 1 jako nowy rekord z id = 1004.
+INSERT INTO uczniowie_dml
+    (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby)
+SELECT
+    (
+
+Ćw 1 napisać skrypt php strona w xampp
+w swoim katalogu zrobić katalog testy a w testach plik o nazwie skrypt 1 php 
+wstawić dowolny rekord do tabeli
 
 
 
 
+
+dokumentacja sql
+w3schools c sharp
+example - MySQLI Object-Oriented trudniejszy a Procedural łatwiejszy
+obsługa formularzy
 
 
 

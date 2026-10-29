@@ -1,3 +1,4 @@
 create new zamiast show all
 przy mysql --skip-ssl -h db -u mariadb -pmariadb mariadb nie robić mysql -h db -u mariadb -pmariadb mariadb
 curl -i http://127.0.0.1:8080
+zorin-po linux

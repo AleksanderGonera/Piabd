@@ -14,3 +14,133 @@ formularz który uruchamia skrypt 1-4 można w polu podać nazwę bazy 1 Kowalsk
 zmienna która pozwala się połączyć z bazą 
 klucze primary key i inne jak trzeba 
 formularz $ do zmiennej 
+
+### Wyjaśnienie każdego unikalnego elementu kodu
+
+---
+
+#### 📁 `config.php`
+
+| Kod | Co robi |
+|---|---|
+| `$host = "localhost"` | Adres komputera, na którym działa MySQL (tu: ten sam komputer) |
+| `$user = "root"` | Nazwa użytkownika MySQL (w XAMPP domyślnie `root`) |
+| `$pass = ""` | Hasło (w XAMPP domyślnie puste) |
+| `$db = "stachu"` | Domyślna nazwa bazy |
+
+---
+
+#### 🔌 Połączenie z MySQL
+
+| Kod | Co robi |
+|---|---|
+| `require 'config.php'` | Wczytuje plik z zmiennymi `$host`, `$user`, `$pass` do bieżącego pliku |
+| `mysqli_connect($host, $user, $pass)` | Łączy się z MySQL **bez** wyboru bazy (do akcji 1 i 2) |
+| `mysqli_connect($host, $user, $pass, $nazwa_bazy)` | Łączy się z MySQL **i od razu** wybiera bazę (do akcji 3 i 4) |
+| `if (!$poloczenie)` | Sprawdza czy połączenie się **nie** udało (`!` = negacja) |
+| `die("...")` | Wyświetla komunikat i **zatrzymuje** skrypt (nie idzie dalej) |
+| `mysqli_connect_error()` | Zwraca tekst błędu połączenia (np. "Access denied", "refused") |
+| `mysqli_close($poloczenie)` | Zamyka połączenie z MySQL (zwalnia zasoby) |
+
+---
+
+#### 📊 Zapytania SQL
+
+| Kod | Co robi |
+|---|---|
+| `CREATE DATABASE IF NOT EXISTS \`stachu\`` | Tworzy bazę, ale jeśli już istnieje — nie rzuca błędu |
+| `DROP DATABASE IF EXISTS \`stachu\`` | Usuwa całą bazę (wraz z tabelami i rekordami) |
+| `CREATE TABLE IF NOT EXISTS adresy (...)` | Tworzy tabelę, ale jeśli już jest — nie rzuca błędu |
+| `INSERT INTO adresy (id, nazwisko, imie) VALUES (1, 'Kowalski', 'Jan')` | Dodaje wiersz do tabeli |
+| `SHOW DATABASES` | Zwraca listę wszystkich baz na serwerze |
+
+---
+
+#### 🏗️ Struktura tabeli
+
+| Kod | Co robi |
+|---|---|
+| `id INT NOT NULL AUTO_INCREMENT` | Kolumna `id`: liczba całkowita, nie może być pusta, rośnie sama (1, 2, 3...) |
+| `nazwisko VARCHAR(50) NOT NULL` | Kolumna `nazwisko`: tekst do 50 znaków, nie może być pusty |
+| `PRIMARY KEY (id)` | `id` jest kluczem głównym — unikalny, nie może być NULL, szybkie wyszukiwanie |
+
+---
+
+#### ⚙️ Wykonywanie zapytań
+
+| Kod | Co robi |
+|---|---|
+| `mysqli_query($poloczenie, $zapytanie)` | Wysyła zapytanie SQL do MySQL. Zwraca `true` (sukces) lub `false` (błąd) |
+| `if (mysqli_query(...))` | Jeśli zapytanie się powiodło → wyświetl sukces |
+| `else { echo "Błąd: " . mysqli_error($poloczenie); }` | Jeśli nie → pokaż co poszło nie tak |
+| `mysqli_error($poloczenie)` | Zwraca tekst ostatniego błędu MySQL (np. "Table doesn't exist") |
+
+---
+
+#### 📋 Odczyt danych (lista baz)
+
+| Kod | Co robi |
+|---|---|
+| `$wynik = mysqli_query($poloczenie, "SHOW DATABASES")` | Zwraca wynik zapytania (tablica wierszy) |
+| `while ($wiersz = mysqli_fetch_row($wynik))` | Pobiera po jednym wierszu z wyniku, dopóki nie skończą się wiersze |
+| `$bazy[] = $wiersz[0]` | Dodaje pierwszą kolumnę wiersza (nazwę bazy) do tablicy `$bazy` |
+
+---
+
+#### 📝 Formularz — odczyt danych
+
+| Kod | Co robi |
+|---|---|
+| `$_SERVER['REQUEST_METHOD'] === 'POST'` | Sprawdza czy strona została wywołana przez formularz (nie przez zwykłe otwarcie) |
+| `(int)$_POST['akcja']` | Bierze wartość z formularza i zamienia na liczbę całkowitą (np. `"3"` → `3`) |
+| `trim($_POST['nazwa_bazy'])` | Usuwa spacje z początku i końca wpisanego tekstu |
+| `$_POST['id'] ?? 1` | Bierze `id` z formularza; jeśli nie ma → użyj `1` (operator `??` = "albo domyślnie") |
+| `$_POST['nazwisko'] ?? 'Kowalski'` | To samo — jeśli puste → `Kowalski` |
+
+---
+
+#### 🛡️ Bezpieczeństwo
+
+| Kod | Co robi |
+|---|---|
+| `htmlspecialchars($nazwisko)` | Zamienia znaki specjalne (`<`, `>`, `&`) na bezpieczne — chroni przed wstrzyknięciem HTML |
+
+---
+
+#### 📂 Wczytywanie skryptów
+
+| Kod | Co robi |
+|---|---|
+| `$plik = "skrypt" . $akcja . ".php"` | Buduje nazwę pliku: np. `"skrypt" . 3 . ".php"` → `"skrypt3.php"` |
+| `file_exists($plik)` | Sprawdza czy plik naprawdę istnieje (chroni przed błędem) |
+| `require $plik` | Wczytuje i wykonuje wybrany skrypt (1, 2, 3 lub 4) |
+
+---
+
+#### 🖥️ HTML / wyświetlanie
+
+| Kod | Co robi |
+|---|---|
+| `foreach ($bazy as $b)` | Przechodzi po każdej bazie z listy |
+| `in_array($wybrana, $bazy)` | Sprawdza czy wybrana baza jest na liście istniejących |
+| `echo "<option value=\"$b\" selected>$b</option>"` | Wyświetla opcję w `<select>` z oznaczeniem "selected" (zaznaczona) |
+| `<?php ... ?>` | Oznacza początek i koniec kodu PHP w pliku HTML |
+| `<?php echo ...; ?>` | Wstawia wartość zmiennej do HTML |
+
+---
+
+#### 🧩 Podsumowanie schematu
+
+```
+require 'config.php'          ← weź zmienne
+mysqli_connect(...)           ← połącz się
+if (!$poloczenie) die(...)    ← jeśli nie udało się → stop
+$zapytanie = "SQL"            ← napisz zapytanie
+mysqli_query(...)             ← wyślij
+if (sukces) echo "OK"         ← pokaż wynik
+else echo mysqli_error(...)   ← pokaż błąd
+mysqli_close(...)             ← zamknij
+```
+
+Każdy skrypt (1–4) to dokładnie ten sam schemat — zmienia się tylko treść `$zapytanie`.
+

@@ -2,3 +2,15 @@ create new zamiast show all
 przy mysql --skip-ssl -h db -u mariadb -pmariadb mariadb nie robić mysql -h db -u mariadb -pmariadb mariadb
 curl -i http://127.0.0.1:8080
 zorin-po linux
+
+(2 razy nie tworzyć tego samego)
+
+4 skrypty stwórz w php
+skrypt 1 tworzy bazę stachu
+skrypt 2 usuwa bazę stachu
+skrypt 3 tworzy w bazie stachu tabelę adresy w której jest id, nazwisko i imię
+skrypt 4 wpisuje do bazy dowolny rekord
+formularz który uruchamia skrypt 1-4 można w polu podać nazwę bazy 1 Kowalski Jan
+zmienna która pozwala się połączyć z bazą 
+klucze primary key i inne jak trzeba 
+formularz $ do zmiennej 

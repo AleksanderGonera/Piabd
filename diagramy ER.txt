@@ -1,0 +1,599 @@
+diagramy er opisz
+
+**Diagram ER** (ang. *Entity-Relationship Diagram*) to graficzne przedstawienie modelu danych, służące do wizualizacji relacji między encjami w systemach informacyjnych 
+i projektowaniu baz danych. Składa się z trzech głównych komponentów: **encji** (rzeczywistych obiektów lub pojęć, np. klient, produkt), **atrybutów** (ich cech, np. 
+imię, cena) oraz **związków** (sposobów powiązania encji, np. „składa zamówienie”). W notacjach graficznych encje reprezentowane są przez **prostokąty**, atrybuty przez 
+**owale**, a związki przez **romby** lub linie łączące. Diagramy ER dzielą się na trzy poziomy szczegółowości: **koncepcyjny** (wysokopoziomowy przegląd relacji), 
+**logiczny** (szczegółowa struktura z atrybutami i ograniczeniami) oraz **fizyczny** (gotowy schemat bazy z typami danych i kluczami). Narzędzia do tworzenia diagramów 
+ER, takie jak **Lucidchart**, **Canva** czy **Visual Paradigm**, umożliwiają generowanie tych schematów ręcznie lub przy użyciu **AI**, co ułatwia analizę istniejących
+baz danych oraz projektowanie nowych struktur bez logicznych błędów.
+
+Brave logo
+Brave logo
+
+Nowa rozmowa
+Ctrl + Shift + O
+
+Ustawienia
+
+Brave logo
+
+
+
+Zapytaj
+Wszystko
+Grafika
+Wiadomości
+Filmy
+Mapy
+Goggles
+Za pomocą narzędzia phpMyAdmin wykonaj operacje na bazie danych: ‒ Utwórz bazę danych o nazwie chat, z zestawem polskich znaków (np. utf8_unicode_ci) ‒ Do bazy zaimportuj tabele z pliku baza.sql z rozpakowanego archiwum ‒ Wykonaj zrzut ekranu po imporcie. Zrzut zapisz w formacie PNG i nazwij import. Nie kadruj zrzutu. Powinien on obejmować cały ekran monitora, z widocznym paskiem zadań. Na zrzucie powinny być widoczne elementy wskazujące na poprawnie wykonany import tabel. ‒ Wykonaj zapytania SQL działające na bazie chat. Zapytania zapisz w pliku kwerendy.txt. Wykonaj zrzuty ekranu przedstawiające wyniki działania kwerend. Zrzuty zapisz w formacie JPEG i nadaj im nazwy kw1, kw2, kw3, kw4, kw5. Zrzuty powinny obejmować cały ekran monitora z widocznym paskiem zadań. ‒ Zapytanie 1: wstawiające do tabeli logowanienick „Jeremi” z hasłem „Jer123”. Wstawianemu wierszowi należy nadać identyfikator, odpowiadający wartości klucza obcego dla wiersza z danymi „Jeremi Kowalski” z tabeli uczestnicy ‒ Zapytanie 2: obliczające średni rok urodzenia uczestników. Wybrana kolumna powinna mieć nazwę (alias) „Średni rok urodzenia”, a obliczony wynik powinien być zaokrąglony w dół do liczby całkowitej ‒ Zapytanie 3: wybierające jedynie imię i nazwisko uczestnika oraz odpowiadające mu nick i hasło dla imion rozpoczynających się literą J. Należy posłużyć się relacją ‒ Zapytanie 4: tworzące użytkownika uczestnik na localhost z hasłem Ucz123& ‒ Zapytanie 5: nadające utworzonemu użytkownikowi prawa do wybierania i aktualizacji danych jedynie dla tabeli uczestnicy
+Pokaż więcej
+
+
+Resolvidas as consultas SQL do INF.03
+
+🌐
+🌐
+🌐
+🌐
++6
+Aqui estão as 5 consultas SQL para o arquivo kwerendy.txt, baseadas na estrutura da base chat (tabelas uczestnicy e logowanienick):
+
+-- Kwerenda 1
+INSERT INTO logowanienick (id, nick, haslo)
+VALUES ((SELECT id FROM uczestnicy WHERE imie = 'Jeremi' AND nazwisko = 'Kowalski'), 'Jeremi', 'Jer123');
+
+-- Kwerenda 2
+SELECT FLOOR(AVG(rok_urodzenia)) AS `Średni rok urodzenia` FROM uczestnicy;
+
+-- Kwerenda 3
+SELECT uczestnicy.imie, uczestnicy.nazwisko, logowanienick.nick, logowanienick.haslo
+FROM uczestnicy
+JOIN logowanienick ON uczestnicy.id = logowanienick.id
+WHERE uczestnicy.imie LIKE 'J%';
+
+-- Kwerenda 4
+CREATE USER 'uczestnik'@'localhost' IDENTIFIED BY 'Ucz123&';
+
+-- Kwerenda 5
+GRANT SELECT, UPDATE ON chat.uczestnicy TO 'uczestnik'@'localhost';
+
+Explicação de cada consulta:
+
+#	Ação	Detalhe
+1	INSERT com subconsulta	O id é obtido dinamicamente da tabela uczestnicy (chave estrangeira de "Jeremi Kowalski")
+2	FLOOR(AVG(...))	FLOOR arredonda para baixo; alias com acento polonês
+3	JOIN + LIKE 'J%'	Relação entre as duas tabelas; filtra nomes iniciados por J
+4	CREATE USER	Cria o usuário no localhost com a senha exata Ucz123&
+5	GRANT restrito	Apenas SELECT e UPDATE, e somente na tabela chat.uczestnicy
+
+Passos no phpMyAdmin (resumo):
+
+Criar a base → aba Bases de dados → nome chat → collation utf8_unicode_ci → Criar.
+Importar → selecionar chat → aba Importar → escolher baza.sql → Executar → capturar tela completa (PNG, nome import).
+Consultas 1–5 → aba SQL → colar cada uma e executar → capturar tela completa após cada (JPEG: kw1 … kw5).
+Salvar todas as consultas no arquivo kwerendy.txt.
+
+
+
+po polsku
+
+
+Przetłumaczono odpowiedź na język polski
+Oto 5 zapytań SQL do pliku kwerendy.txt, opartych na strukturze bazy chat (tabele uczestnicy i logowanienick):
+
+-- Kwerenda 1
+INSERT INTO logowanienick (id, nick, haslo)
+VALUES ((SELECT id FROM uczestnicy WHERE imie = 'Jeremi' AND nazwisko = 'Kowalski'), 'Jeremi', 'Jer123');
+
+-- Kwerenda 2
+SELECT FLOOR(AVG(rok_urodzenia)) AS `Średni rok urodzenia` FROM uczestnicy;
+
+-- Kwerenda 3
+SELECT uczestnicy.imie, uczestnicy.nazwisko, logowanienick.nick, logowanienick.haslo
+FROM uczestnicy
+JOIN logowanienick ON uczestnicy.id = logowanienick.id
+WHERE uczestnicy.imie LIKE 'J%';
+
+-- Kwerenda 4
+CREATE USER 'uczestnik'@'localhost' IDENTIFIED BY 'Ucz123&';
+
+-- Kwerenda 5
+GRANT SELECT, UPDATE ON chat.uczestnicy TO 'uczestnik'@'localhost';
+
+Wyjaśnienie każdego zapytania:
+
+#	Działanie	Szczegóły
+1	INSERT z podzapytaniem	id jest pobierane dynamicznie z tabeli uczestnicy (klucz obcy dla „Jeremi Kowalski")
+2	FLOOR(AVG(...))	FLOOR zaokrągla w dół; alias z polskimi znakami
+3	JOIN + LIKE 'J%'	Relacja między dwiema tabelami; filtruje imiona zaczynające się na J
+4	CREATE USER	Tworzy użytkownika na localhost z hasłem Ucz123&
+5	GRANT ograniczony	Tylko SELECT i UPDATE, wyłącznie dla tabeli chat.uczestnicy
+
+Kroki w phpMyAdmin (skrót):
+
+Utworzenie bazy → zakładka Bazy danych → nazwa chat → collation utf8_unicode_ci → Utwórz.
+Import → wybrać chat → zakładka Importuj → wybrać baza.sql → Uruchom → zrobić zrzut ekranu (PNG, nazwa import).
+Zapytania 1–5 → zakładka SQL → wkleić każde i uruchomić → zrobić zrzut ekranu po każdym (JPEG: kw1 … kw5).
+Zapisz wszystkie zapytania w pliku kwerendy.txt.
+
+
+
+Obraz 2. Witryna internetowa. Stan początkowy
+Cechy grafiki:
+‒ Grafika Jolka.jpg przygotowana, podobnie jak Krzysiek.jpg. Grafikę Jolka.jpg należy wykadrować do
+kwadratu tak, aby była widoczna tylko cała twarz. Następnie należy przeskalować dokładnie do
+rozmiaru 70 px na 70 px.
+Cechy witryny:
+‒ Składa się ze strony o nazwie chat.html zapisanej w języku HTML5
+‒ Ustawiony język zawartości strony na polski
+‒ Jawnie zastosowany właściwy standard kodowania polskich znaków
+‒ Tytuł strony widoczny na karcie przeglądarki: „Chat”
+‒ Arkusz stylów w pliku o nazwie styl.css prawidłowo połączony z kodem strony
+‒ Podział strony na baner i pod nim blok główny, obok obu bloków blok boczny oraz na dole stopka.
+Podział zrealizowany wyłącznie za pomocą semantycznych znaczników sekcji języka HTML5 tak, aby
+po uruchomieniu w przeglądarce wygląd układu bloków był zgodny z obrazem 2
+‒ Zawartość banera: nagłówek drugiego stopnia o treści „Chat”
+‒ Zawartość bloku bocznego:
+‒ Nagłówek trzeciego stopnia o treści „Chaty”
+‒ Lista punktowana z elementami: „Ogólny” , „Tematyczne”. Drugi element zagnieżdża listę
+numerowaną z elementami „Turystyczny”, „Żeglarski”, „Filatelistyczny”, „Hodowla zwierzątek
+domowych”
+‒ Nagłówek trzeciego stopnia o treści „Uczestnicy”
+‒ Paragraf (akapit) o treści „Jolanta Nowak”
+‒ Obraz Jolka.jpg z tekstem alternatywnym "Jolanta Nowak"
+‒ Paragraf o treści „Krzysztof Łukasiński”
+Strona 4 z 7
+‒ Obraz Krzysiek.jpg z tekstem alternatywnym "Krzysztof Łukasiński"
+‒ Zawartość bloku głównego:
+‒ Blok chatu zawierający:
+− Jeden blok z wypowiedzią Jolanty: Obraz Jolka.jpg i paragraf: „Cześć idziesz jutro do
+kina?”
+− Jeden blok z wypowiedzią Krzysztofa: Obraz Krzysiek.jpg i paragraf: „Tak! A ty?”
+‒ Obok siebie: napis „Wpisz wiadomość:”, pole edycyjne, przycisk o treści „Wyślij”. Kliknięcie
+przycisku powoduje wywołanie funkcji skryptu
+‒ Poniżej: przycisk o treści: „Generuj losową odpowiedź”. Kliknięcie przycisku powoduje
+wywołanie funkcji skryptu
+‒ Zawartość stopki: nagłówek piątego stopnia o treści: „Chat wykonał: ”, dalej wstawiony numer
+zdającego.
+Styl CSS witryny internetowej
+Styl CSS zdefiniowany jest w całości w zewnętrznym pliku o nazwie styl.css. Cechy formatowania CSS,
+działające na stronie:
+‒ Domyślne formatowanie wszystkich selektorów: krój czcionki Garamond
+‒ Dla banera: kolor tła Tomato, biały kolor czcionki, wyrównanie tekstu do środka, szerokość 80%,
+wysokość 80 px
+‒ Dla bloku głównego: szerokość 80%, wysokość 600 px
+‒ Dla bloku bocznego: kolor tła Coral, szerokość 20%, wysokość 680 px
+‒ Dla stopki: kolor tła Tomato, biały kolor czcionki, wyrównanie tekstu do środka
+‒ Dla selektora obrazu: zaokrąglenie rogów 50%, marginesy wewnętrzne lewy i prawy 10 px
+‒ Dla bloku chatu: obramowanie linią ciągłą o szerokości 1 px i kolorze Tomato, marginesy zewnętrzne
+15 px, wysokość 470 px, paski przewijania zawsze widoczne na stronie
+‒ Wspólne dla bloków z wypowiedziami: zaokrąglenie rogów 5 px, szerokość 90%, wysokość 70 px,
+marginesy zewnętrzne 2%, marginesy wewnętrzne 3 px
+‒ Dodatkowo dla bloków z wypowiedziami Jolanty: kolor tła #EEE, obraz opływany tekstem z prawej
+strony (obraz po lewej stronie)
+‒ Dodatkowo dla bloków z wypowiedziami Krzysztofa: kolor tła #CCC, wyrównanie tekstu do prawej
+strony, obraz opływany tekstem z lewej strony (obraz po prawej stronie)
+‒ Dla obu przycisków: kolor tła Tomato, obramowanie linią ciągłą o szerokości 1 px i kolorze DarkRed,
+marginesy wewnętrzne 5 px, czcionka pogrubiona
+‒ Dla pola edycyjnego tekstowego: szerokość 500 px
+Uwaga: styl CSS obrazu należy zdefiniować wyłącznie przy pomocy selektora znacznika obrazu. Jest to
+uwarunkowane projektem późniejszej rozbudowy witryny.
+Skrypt
+Wymagania dotyczące skryptu:
+‒ Napisany w języku JavaScript
+‒ Należy stosować znaczące nazewnictwo wszystkich zmiennych i funkcji
+‒ Działanie funkcji wywoływanej po kliknięciu przycisku Wyślij:
+− Pobierany jest tekst z pola edycyjnego i umieszczany w oknie chatu jako ostatni
+− Tekst jest formatowany jako wypowiedź Jolanty, zgodnie z obrazem 3, czyli utworzony jest blok
+z wypowiedzią zawierający obraz Jolka.jpg i paragraf zgodny z tekstem wpisanym do pola
+edycyjnego
+Strona 5 z 7
+− Jeśli blok chatu jest cały wypełniony, powinien być przewinięty do nowo wstawionej wypowiedzi
+Obraz 3. Działanie funkcji wywoływanej kliknięciem przycisku Wyślij
+‒ Działanie funkcji wywoływanej po kliknięciu przycisku „Generuj losową odpowiedź”
+− Losowana jest wypowiedź Krzysztofa z wcześniej zadeklarowanej tablicy. Tablica zawiera 9
+elementów, którymi są wypowiedzi. Należy je skopiować z pliku pomocniczego tekstyDoChatu.txt
+rozpakowanego z archiwum
+− Losowana liczba z przedziału od 0 do 8 jest indeksem tablicy
+− Wypowiedź jest umieszczana w oknie chatu jako ostatnia
+− Tekst jest formatowany jako wypowiedź Krzysztofa, zgodnie z obrazem 4, czyli utworzony jest
+blok z wypowiedzią zawierający obraz Krzysiek.jpg i paragraf zgodny z wylosowanym tekstem
+− Jeśli blok chatu jest cały wypełniony, powinien być przewinięty do nowo wstawionej wypowiedzi
+Obraz 4. Działanie funkcji wywoływanej kliknięciem przycisku Generuj...
+Strona 6 z 7
+Tabela 1. Wybrane pola i metody modelu DOM języka JavaScript
+Wyszukiwanie elementów Zmiana elementów
+document.getElementById(id)
+document.getElementsByTagName(TagName)
+document.getElementsByClassName(ClassName)
+document.getElementsByName(ElementName)
+document.querySelector(CSSselector)
+document.querySelectorAll(CSSselector)
+element.innerHTML = "nowa zawartość"
+element.attribute_name = "nowa zawartość"
+element.setAttribute(atrybut, wartosc)
+element.style.property_name = "nowa zawartość"
+Operacje na elementach dokumentu Wybrane właściwości obiektu style
+document.createElement(element)
+document.removeChild(element)
+document.appendChild(element)
+document.replaceChild(element)
+document.write(text)
+backgroundColor
+color
+fontSize
+fontStyle = "normal | italic | oblique | initial | inherit"
+fontWeight = "normal | lighter | bold | bolder | value |
+initial | inherit"
+listStyleType = "circle| decimal | disc | none | square |
+initial..."
+Wybrane zdarzenia HTML
+Zdarzenia myszy Zdarzenia klawiatury Zdarzenia obiektów
+onclick
+ondblclick
+onmouseover
+onmouseout
+onkeydown
+onkeypress
+onkeyup
+onload
+onresize
+onfocusin
+onfocusout
+Elementy formularzy Metody i pola obiektu string (JS)
+Ważniejsze typy pola input: button, checkbox,
+number, password, radio, text
+Inne elementy: select, textarea
+Length
+indexOf(text)
+search(text)
+substr(startIndex, endIndex)
+replace(textToReplace, newText)
+toUpperCase()
+toLowerCase()
+Tabela 2. Tworzenie nowych elementów DOM i wstawianie ich do bloków
+Uwaga: w miejscu element należy wstawić obiekt konkretnego elementu, zwróconego takimi funkcjami jak
+getElementById, createElement...
+Kod Opis
+document.createElement("h2") Tworzy element DOM <h2> i zwraca go. Jako parametr
+należy podać nazwę elementu, np. ul, p, table ...
+element. classList.add("klasa1"); Przypisuje do danego elementu klasę stylu CSS
+element.nazwa-atrybutu = ... Ustawia wartości atrybutów dla danego elementu
+element.innerText = .... Ustawia tekst dla elementów takich jak paragraf, nagłówek,
+przycisk itp.
+element1.appendChild(element2); Zagnieżdża element2 w elemencie1. Elementem1 może
+być cały dokument, blok, lista lub inny element agregujący.
+Wewnątrz niego zostaje umieszczony element2
+element.scrollIntoView(); Przewija zawartość bloku / strony do wskazanego elementu
+Tabela 3. Wybrane funkcje numeryczne MySQL
+CEIL(number) The CEIL() function returns the smallest integer value that is bigger than or
+equal to a number.
+FLOOR(number) The FLOOR() function returns the largest integer value that is smaller than or
+equal to a number.
+ROUND(number,
+decimals)
+The ROUND() function rounds a number to a specified number of decimal
+places.
+TRUNCATE(number,
+decimals)
+The TRUNCATE() function truncates a number to the specified number of
+decimal places.
+Strona 7 z 7
+UWAGA: po zakończeniu pracy utwórz plik tekstowy o nazwie przeglądarka.txt. Zapisz w nim nazwę
+przeglądarki internetowej, w której weryfikowana była poprawność działania witryny. Umieść go w folderze
+z numerem zdającego.
+Nagraj płytę z rezultatami pracy. W folderze z numerem zdającego powinny znajdować się pliki: chat.html,
+import.png, Jolka.jpg, Krzysiek.jpg, kw1.jpg, kw2.jpg, kw3.jpg, kw4.jpg, kw5.jpg kwerendy.txt,
+przeglądarka.txt, styl.css, ewentualnie inne przygotowane pliki. Po nagraniu płyty sprawdź poprawność jej
+odczytu. Opisz płytę numerem zdającego i pozostaw zapakowaną w pudełku na stanowisku wraz z arkuszem
+egzaminacyjnym.
+Czas przeznaczony na wykonanie zadania wynosi 150 minut.
+Ocenie będzie podlegać 5 rezultatów:
+‒ operacje na bazie danych,
+‒ zawartość witryny internetowej,
+‒ działanie witryny internetowej,
+‒ styl CSS witryny internetowej,
+‒ skrypt.
+Pokaż więcej
+
+
+Gerou código HTML, CSS e JS
+Oto kompletne pliki do zadania:
+
+chat.html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header>
+        <h2>Chat</h2>
+    </header>
+
+    <main>
+        <div id="blokChatu" class="chat">
+            <div class="wypowiedz jolanta">
+                <img src="Jolka.jpg" alt="Jolanta Nowak">
+                <p>Cześć idziesz jutro do kina?</p>
+            </div>
+            <div class="wypowiedz krzysztof">
+                <img src="Krzysiek.jpg" alt="Krzysztof Łukasiński">
+                <p>Tak! A ty?</p>
+            </div>
+        </div>
+        <p>Wpisz wiadomość: <input type="text" id="poleWiadomosci"></p>
+        <button id="przyciskWyslij" onclick="wyslijWiadomosc()">Wyślij</button>
+        <button id="przyciskGeneruj" onclick="generujOdpowiedz()">Generuj losową odpowiedź</button>
+    </main>
+
+    <aside>
+        <h3>Chaty</h3>
+        <ul>
+            <li>Ogólny</li>
+            <li>Tematyczne
+                <ol>
+                    <li>Turystyczny</li>
+                    <li>Żeglarski</li>
+                    <li>Filatelistyczny</li>
+                    <li>Hodowla zwierzątek domowych</li>
+                </ol>
+            </li>
+        </ul>
+        <h3>Uczestnicy</h3>
+        <p>Jolanta Nowak</p>
+        <img src="Jolka.jpg" alt="Jolanta Nowak">
+        <p>Krzysztof Łukasiński</p>
+        <img src="Krzysiek.jpg" alt="Krzysztof Łukasiński">
+    </aside>
+
+    <footer>
+        <h5>Chat wykonał: 12345</h5>
+    </footer>
+
+    <script>
+        var tekstyDoChatu = [
+            "Super, do zobaczenia!",
+            "Jaki film oglądamy?",
+            "Mam bilety, nie martw się.",
+            "Może weźmy popcorn?",
+            "Kino otwarte o 18:00.",
+            "Zaczekaj mnie 5 minut.",
+            "Wolisz seans 3D?",
+            "Jestem już w drodze.",
+            "Do zobaczenia tam!"
+        ];
+
+        function wyslijWiadomosc() {
+            var tekst = document.getElementById("poleWiadomosci").value;
+            if (tekst === "") return;
+
+            var blok = document.createElement("div");
+            blok.classList.add("wypowiedz", "jolanta");
+
+            var obraz = document.createElement("img");
+            obraz.src = "Jolka.jpg";
+            obraz.alt = "Jolanta Nowak";
+
+            var paragraf = document.createElement("p");
+            paragraf.innerText = tekst;
+
+            blok.appendChild(obraz);
+            blok.appendChild(paragraf);
+
+            var chat = document.getElementById("blokChatu");
+            chat.appendChild(blok);
+
+            document.getElementById("poleWiadomosci").value = "";
+            blok.scrollIntoView();
+        }
+
+        function generujOdpowiedz() {
+            var indeks = Math.floor(Math.random() * 9);
+            var tekst = tekstyDoChatu[indeks];
+
+            var blok = document.createElement("div");
+            blok.classList.add("wypowiedz", "krzysztof");
+
+            var obraz = document.createElement("img");
+            obraz.src = "Krzysiek.jpg";
+            obraz.alt = "Krzysztof Łukasiński";
+
+            var paragraf = document.createElement("p");
+            paragraf.innerText = tekst;
+
+            blok.appendChild(obraz);
+            blok.appendChild(paragraf);
+
+            var chat = document.getElementById("blokChatu");
+            chat.appendChild(blok);
+
+            blok.scrollIntoView();
+        }
+    </script>
+</body>
+</html>
+
+styl.css
+* {
+    font-family: Garamond;
+}
+
+header {
+    background-color: Tomato;
+    color: white;
+    text-align: center;
+    width: 80%;
+    height: 80px;
+}
+
+main {
+    width: 80%;
+    height: 600px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+aside {
+    background-color: Coral;
+    width: 20%;
+    height: 680px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+footer {
+    background-color: Tomato;
+    color: white;
+    text-align: center;
+}
+
+img {
+    border-radius: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.chat {
+    border: 1px solid Tomato;
+    margin: 15px;
+    height: 470px;
+    overflow: scroll;
+}
+
+.wypowiedz {
+    border-radius: 5px;
+    width: 90%;
+    height: 70px;
+    margin: 2%;
+    padding: 3px;
+}
+
+.jolanta {
+    background-color: #EEE;
+}
+
+.jolanta img {
+    float: left;
+}
+
+.krzysztof {
+    background-color: #CCC;
+    text-align: right;
+}
+
+.krzysztof img {
+    float: right;
+}
+
+button {
+    background-color: Tomato;
+    border: 1px solid DarkRed;
+    padding: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 500px;
+}
+
+przeglądarka.txt
+Google Chrome
+
+Uwagi:
+
+W chat.html zamień 12345 w stopce na swój numer zdającego.
+Tablicę tekstyDoChatu z 9 elementami skopiuj z pliku tekstyDoChatu.txt z archiwum — powyżej są przykładowe teksty.
+Układ: header na górze, main + aside obok siebie (inline-block), footer na dole — dokładnie jak na Obrazie 2.
+Selektor obrazu img jest zdefiniowany wyłącznie jako selektor znacznika (nie klasy), zgodnie z wymogiem.
+
+
+
+Uwagi:
+
+W chat.html zamień 12345 w stopce na swój numer zdającego.
+Tablicę tekstyDoChatu z 9 elementami skopiuj z pliku tekstyDoChatu.txt z archiwum — powyżej są przykładowe teksty.
+Układ: header na górze, main + aside obok siebie (inline-block), footer na dole — dokładnie jak na Obrazie 2.
+Selektor obrazu img jest zdefiniowany wyłącznie jako selektor znacznika (nie klasy), zgodnie z wymogiem. jak to zrobić w gimp
+Pokaż mniej
+
+
+Stopped
+Coś poszło nie tak
+
+Spróbuj ponownie
+
+
+
+jak to zrobić w gimp: echy grafiki:
+‒ Grafika Jolka.jpg przygotowana, podobnie jak Krzysiek.jpg. Grafikę Jolka.jpg należy wykadrować do
+kwadratu tak, aby była widoczna tylko cała twarz. Następnie należy przeskalować dokładnie do
+rozmiaru 70 px na 70 px.
+Pokaż więcej
+
+
+Instruções de recorte e redimensionamento no GIMP
+Jak wykadrować i przeskalować Jolka.jpg w GIMP
+Krok 1 – Kadrowanie do kwadratu (twarz)
+Otwórz Jolka.jpg w GIMP (Plik → Otwórz).
+Wybierz narzędzie Kadrowanie – skrót Shift+C (lub Narzędzia → Narzędzia przekształcania → Kadruj). 
+W panelu Opcje narzędzia (lewy panel) zaznacz pole Stałe i z listy wybierz Proporcje.  Wpisz 1:1 – ramka kadrowania będzie zawsze kwadratem. 
+Narysuj kwadrat na obrazie tak, aby w środku była cała twarz (od czubka głowy do brody, bez tła po bokach).
+Dostosuj rozmiar i położenie, przeciągając rogi / boki ramki.
+Zatwierdź klawiszem Enter (lub podwójne kliknięcie wewnątrz ramki).
+Krok 2 – Przeskalowanie do 70×70 px
+W menu wybierz Obraz → Skaluj obraz (ang.  Image → Scale Image).
+W polu Szerokość wpisz 70, w polu Wysokość wpisz 70 (jednostka: px).
+Łańcuszek proporcji powinien być złączony (obraz jest już kwadratem, więc wymiary i tak się zgadzają).
+Kliknij Skaluj.
+Krok 3 – Zapis jako JPEG
+Plik → Eksportuj jako… (ang. File → Export As).
+Nazwij plik Jolka.jpg, format JPEG.
+Kliknij Eksportuj, potem Zapisz (domyślne parametry jakości są w porządku).
+Ważne: najpierw kadrujesz, potem skalujesz.  Gdybyś przeskalował przed kadrowaniem, straciłbyś precyzję kadru.
+
+
+
+
+co jeżeli po enterze obraz się nie zatwierdza
+
+
+
+Rozwiązanie problemu z kadrowaniem w GIMP
+Alternatywne sposoby zatwierdzenia kadru w GIMP
+Jeśli Enter nie działa, spróbuj kolejno:
+
+1. Przycisk „Kadruj" w opcjach narzędzia
+Po narysowaniu ramki kadru, w lewym panelu (Opcje narzędzia) jest przycisk „Kadruj" (Crop) – kliknij go.
+
+2. Zaznaczenie + menu
+Użyj narzędzia Zaznacz prostokąt (M) i zaznacz kwadrat na twarzy.
+Menu: Obraz → Kadruj do zaznaczenia (Image → Crop to Selection).
+3. Sprawdź, czy nie ma problemu z warstwami
+Jeśli obraz ma wiele warstw i kadr byłby pusty dla którejś z nich, GIMP blokuje operację.
+Rozwiązanie: Widok → Pokaż tylko bieżącą warstwę (lub złącz warstwy: Warstwa → Złącz widoczne warstwy) przed kadrowaniem.
+4. Wersja GIMP
+W GIMP 2.10 Enter działa normalnie.
+W GIMP 3.0 (jeśli go używasz) interfejs się zmienił – kadr zatwierdza się przyciskiem w pasku narzędzi na górze.
+Najczęściej pomaga sposób 2 (zaznaczenie prostokątem + Kadruj do zaznaczenia) – jest najpewniejszy i nie zależy od zachowania klawiszy.
+
+Rozwijanie
+Jak przywrócić poprzednią wersję obrazu po błędnym kadrze?
+Czy kadr w GIMPie zachowuje oryginalne piksele?
+Jak przywrócić usunięte krawędzie po zatwierdzeniu kadru?
+
+
+
+
+Zadaj pytanie uzupełniające
+
+
+
+Odpowiedź wygenerowana przez AI. Prosimy zweryfikuj najważniejsze fakty.
+Za pomocą narzędzia phpMyAdmin wykonaj operacje na bazie danych: ‒ Utwórz bazę danych o nazwie chat,... - Zapytaj BraveZapytaj Brave
+Wyjaśnij
+Szukaj

@@ -1,0 +1,51 @@
+GraphML (XML) co to
+
+Szybka odpowiedź
+GraphML (Graph Markup Language) to bazujący na XML format pliku służący do opisywania struktur grafów.  Został opracowany przez społeczność zajmującą się wizualizacją grafów, aby zdefiniować uniwersalny standard wymiany danych między różnymi narzędziami. 
+
+Format ten charakteryzuje się następującymi cechami:
+
+Podstawowa struktura: Plik składa się z elementów <graph>, <node> (węzły) i <edge> (krawędzie), gdzie każdy węzeł ma unikalny identyfikator, a krawędzie odwołują się do nich atrybutami source i target. 
+Wsparcie dla różnych typów grafów: Obsługuje grafy kierowane, niekierowane, mieszane, hipergrafy oraz grafy hierarchiczne. 
+Rozszerzalność: Posiada mechanizm rozszerzeń oparty na elementach <key> i <data>, który pozwala na dodawanie aplikacyjnych atrybutów i złożonych danych do węzłów i krawędzi bez łamania kompatybilności z rdzeniem formatu.
+Narzędzia: Jest szeroko wspierany przez popularne biblioteki i oprogramowanie, takie jak NetworkX (Python), yFiles, Gephi oraz Oracle Property Graph.
+
+Kopiuj
+
+🌐
+🌐
+🌐
+🌐
++16
+NetworkX (Python), yFiles, Gephi oraz Oracle Property Graph i xml co to
+
+
+Defining NetworkX, yFiles, Gephi, Oracle PG, and XML
+Oto krótki opis każdego z wymienionych narzędzi i technologii:
+
+Opis
+NetworkX	Darmowa biblioteka Pythona (licencja BSD) do budowania, analizy i wizualizacji grafów.  Obsługuje grafy niekierowane, kierowane, wielokrawędziowe. Oferuje setki algorytmów (najkrótsze ścieżki, centralność, społeczności itp.).
+yFiles	Komercyjny SDK do wizualizacji, edycji i analizy grafów.  Dostępny dla HTML/JavaScript, Java, .NET i WPF. Nie jest gotową aplikacją, lecz biblioteką do wbudowywania wizualizacji grafów w własne aplikacje. Obsługuje tysiące algorytmów layoutu (hierarchiczny, organiczny, radialny itp.).
+Gephi	Darmowe, open-source narzędzie do analizy i wizualizacji sieci (Java/NetBeans).  Obsługuje sieci do ~1M węzłów i 5M krawędzi. Oferuje metryki (centralność, modułowość, PageRank), wykrywanie społeczności (Louvain/Leiden) i layout ForceAtlas2. Importuje m.in. GraphML, GEXF, CSV.
+Oracle Property Graph	Funkcja bazy danych Oracle (od wersji 23ai/26ai), która pozwala tworzyć i zapytywać grafy właściwości bezpośrednio w SQL. Węzły i krawędzie są mapowane na istniejące tabele relacyjne. Zapytania realizuje się przez standard SQL/PGQ (ISO/IEC 9075-16) lub język PGQL. Oferuje ponad 80 wbudowanych algorytmów grafowych. 
+XML	Extended Markup Language – standardowy format opisu danych w strukturze drzewa (elementy z atrybutami i treścią). Służy do przechowywania i wymiany danych między systemami. GraphML jest właśnie zdefiniowany jako dokument XML.
+
+W kontekście GraphML: NetworkX i Gephi potrafią czytać/pisać pliki .graphml, yFiles importuje XML (w tym GraphML) jako źródło danych, a Oracle Property Graph przechowuje grafy w bazie relacyjnej, więc XML służy tu głównie jako format wymiany danych między tymi narzędziami.
+
+
+Kopiuj
+
+
+wpf,  język PGQL, PageRank), wykrywanie społeczności (Louvain/Leiden) i layout ForceAtlas2, NetBeans co to
+
+
+
+Explained WPF, PGQL, PageRank, community detection, layout, and NetBeans
+Termin	Opis
+WPF	Windows Presentation Foundation – framework UI od Microsoftu do tworzenia aplikacji desktopowych na Windows.  Interfejs opisuje się w XAML (deklaratywny markup), a logikę w C#. Renderowanie oparte na DirectX (wektorowe, niezależne od rozdzielczości). Działa wyłącznie na Windows.
+PGQL	Property Graph Query Language – język zapytań dla grafów właściwości, stworzony przez Oracle.  Łączy składnię SQL (SELECT, WHERE, GROUP BY, agregacje) z dopasowaniem wzorców grafowych (wierzchołki, krawędzie, ścieżki). Wersja 2.0 jest w pełni zgodna ze standardem SQL/PGQ (ISO).
+PageRank	Metryka centralności węzła w grafie – mierzy, jak „ważny" jest dany węzeł na podstawie liczby i jakości krawędzi prowadzących do niego. Oryginalnie zaprojektowany przez Google do rankingu stron WWW. Im więcej ważnych węzłów wskazuje na dany węzeł, tym wyższy jego PageRank.
+Louvain	Algorytm wykrywania społeczności w grafie (Blondel et al., 2008). Działa iteracyjnie: (1) przesuwa węzły do społeczności maksymalizującej modularność, (2) agreguje graf (każda społeczność → jeden węzeł).  Szybki, ale może dawać słabo połączone społeczności.
+Leiden	Ulepszona wersja Louvain (Traag et al., 2019). Dodaje fazę refinowania, która gwarantuje, że każda społeczność jest połączona. Jest też szybsza od Louvain dzięki „szybkiemu przemieszczaniu" (odwiedza tylko węzły, których sąsiedztwo się zmieniło). 
+ForceAtlas2	Algorytm layoutu siłowego (force-directed) do wizualizacji grafów, zaprojektowany dla Gephi.  Symuluje system fizyczny: węzły odpychają się (jak ładunki), krawędzie przyciągają (jak sprężyny). Skaluje się do dużych grafów dzięki przybliżeniu Barnes-Hut (O(n log n)). 
+NetBeans	Darmowe, open-source IDE (Apache Software Foundation / Oracle), napisane w Javie. Obsługuje Java, JavaScript, PHP, C/C++, HTML5 i inne.  Działa na Windows, Linux, macOS i BSD. Gephi jest zbudowany na platformie NetBeans.

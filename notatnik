@@ -1,0 +1,10 @@
+dylemat spoleczny film
+PMSOCHO yt
+uw-team.org
+kursy php i mysql
+jportal
+seorank
+create table pracownicy(id int auto_increment, imie varchar(20), nazwisko varchar(20), dzial int, zarobki int, primary key(id));
+desc nazwatabeli;
+insert into i jeszcze jest sposób drugi
+insert into pracownicy values(NULL, 'Jan', 'Nowak', 1,2,3));

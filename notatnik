@@ -7,4 +7,20 @@ seorank
 create table pracownicy(id int auto_increment, imie varchar(20), nazwisko varchar(20), dzial int, zarobki int, primary key(id));
 desc nazwatabeli;
 insert into i jeszcze jest sposób drugi
-insert into pracownicy values(NULL, 'Jan', 'Nowak', 1,2,3));
+insert into pracownicy values(NULL, 'Jan', 'Nowak', 1,2500);
+select * from pracownicy where imie='Adam' and nazwisko='Kowalski';   where zarobki > 800 and zarobki < 1400;     moze byc bez tych dokladnych spacji
+zamiast * mozna wpisac np. imie,nazwissko
+update pracownicy set dzial=2 where id =3;
+select sum(zarobki) as zarobki from pracownicy;
+moze byc tez moze select sum(zarobki) from pracownicy;   where tez tu dziala
+alias czyli nazwa w jakiej sie wyswietli
+select avg(zarobki) from pracownicy;   czyli average to średnia
+* czyli gwiazdka to uwzglednienie wszystkiego
+w count wpisujemy 1 prawie zawsze
+select count(1) from pracownicy;
+nie robic bez parametrów nigdy drop ani delete
+delete from pracownicy where id=3 usuwa rekordy
+drop usuwa wszystko
+update pracownicy set dzial=2 where id=4
+create table dzialy (numer int, nazwa varchar(15), primary key numer);
+1 produkcja,  2 marketing   dzialy

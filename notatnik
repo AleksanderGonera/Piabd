@@ -24,3 +24,5 @@ drop usuwa wszystko
 update pracownicy set dzial=2 where id=4
 create table dzialy (numer int, nazwa varchar(15), primary key numer);
 1 produkcja,  2 marketing   dzialy
+n-1 liczba minimalna potrzebna
+select imie, nazwisko, nazwa from pracownicy, dzialy where dzial=numer;

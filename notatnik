@@ -26,3 +26,211 @@ create table dzialy (numer int, nazwa varchar(15), primary key numer);
 1 produkcja,  2 marketing   dzialy
 n-1 liczba minimalna potrzebna
 select imie, nazwisko, nazwa from pracownicy, dzialy where dzial=numer;
+KONTYNUACJA
+id telefon
+1 aifon
+2 motofoto
+int varchar
+
+jak zrobic tabele id telefon 1 aifon 2 motofoto int varchar
+
+Szybka odpowiedź
+Aby utworzyć tabelę z kolumnami id (typ INT) oraz telefon (typ VARCHAR), należy użyć polecenia CREATE TABLE. Poniżej znajduje się przykładowy kod SQL:
+
+CREATE TABLE Telefon (
+    id INT NOT NULL,
+    telefon VARCHAR(255) NOT NULL
+);
+
+W powyższym przykładzie:
+
+id INT definiuje kolumnę przechowującą liczby całkowite. 
+telefon VARCHAR(255) definiuje kolumnę tekstową o zmiennej długości (do 255 znaków).
+NOT NULL zapewnia, że kolumny te nie mogą pozostać puste (opcjonalne, w zależności od wymagań). 
+Jeśli chcesz, aby id było unikalnym identyfikatorem rekordu, warto dodać ograniczenie PRIMARY KEY:
+
+CREATE TABLE Telefon (
+    id INT NOT NULL PRIMARY KEY,
+    telefon VARCHAR(255) NOT NULL
+);
+
+
+Kopiuj
+
+🌐
+🌐
+🌐
+🌐
++16
+w konsoli xanpp
+
+
+Tworzenie tabeli w konsoli XAMPP
+Zakładam, że chodzi Ci o konsolę XAMPP (Shell).  Oto kroki:
+
+Otwórz XAMPP Control Panel i upewnij się, że MySQL jest uruchomione (zielony "Start").
+Kliknij przycisk Shell przy module MySQL.
+W konsoli wpisz:
+mysql -u root -p
+
+(hasło roota w XAMPP domyślnie jest puste — po prostu naciśnij Enter). 
+
+Wybierz bazę danych (np. moja_baza):
+USE moja_baza;
+
+Utwórz tabelę:
+CREATE TABLE Telefon (
+    id INT NOT NULL AUTO_INCREMENT,
+    telefon VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+Sprawdź, czy tabela powstała:
+SHOW TABLES;
+
+Wyjdź z MySQL:
+EXIT;
+
+Alternatywa: Możesz też użyć phpMyAdmin — otwórz przeglądarkę, wejdź na http://localhost/phpmyadmin, wybierz bazę, kliknij zakładkę SQL, wklej polecenie CREATE TABLE ... i naciśnij Go. 
+
+
+Kopiuj
+
+
+w tej tabeli ma być wstawione 1. aifon 2. motofoto i zrób jeszcze jedną tabelę z imie nazwisko dzial zarobki czyli 1 Jan Nowak 1 2500, 2 Adam Kowalski 1 3500, 4 Robert Brzozowski 2 1500 i kolumna nazwa która bierze numer z dzial i wyswieltla dzial 1 jako produkcja a 2 jako marketing
+Pokaż więcej
+
+
+Wygenerowanie zapytań SQL
+Oto kompletne polecenia do konsoli XAMPP (MySQL):
+
+1. Wstaw dane do tabeli Telefon:
+
+INSERT INTO Telefon (id, telefon) VALUES (1, 'aifon');
+INSERT INTO Telefon (id, telefon) VALUES (2, 'motofoto');
+
+2. Utwórz tabelę Pracownicy z kolumną nazwa (generated column):
+
+CREATE TABLE Pracownicy (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    imie VARCHAR(50) NOT NULL,
+    nazwisko VARCHAR(50) NOT NULL,
+    dzial INT NOT NULL,
+    zarobki INT NOT NULL,
+    nazwa VARCHAR(50) GENERATED ALWAYS AS (
+        CASE 
+            WHEN dzial = 1 THEN 'Produkcja'
+            WHEN dzial = 2 THEN 'Marketing'
+        END
+    ) VIRTUAL
+);
+
+3. Wstaw dane:
+
+INSERT INTO Pracownicy (imie, nazwisko, dzial, zarobki) VALUES
+('Jan', 'Nowak', 1, 2500),
+('Adam', 'Kowalski', 1, 3500),
+('Robert', 'Brzozowski', 2, 1500);
+
+4. Sprawdź wynik:
+
+SELECT * FROM Pracownicy;
+
+Wynik:
+
+id	imie	nazwisko	dzial	zarobki	nazwa
+1	Jan	Nowak	1	2500	Produkcja
+2	Adam	Kowalski	1	3500	Produkcja
+3	Robert	Brzozowski	2	1500	Marketing
+
+Kolumna nazwa jest wirtualna (VIRTUAL) — nie zajmuje miejsca na dysku, a wartość jest wyliczana automatycznie z dzial przy każdym odczycie. Nie musisz jej ręcznie wypełniać przy INSERT.
+
+
+Kopiuj
+
+
+jak usunac virtualną i jak zrobić bez virtual
+
+
+Sprawdzanie sposobu usunięcia kolumny
+Usunięcie kolumny nazwa:
+
+ALTER TABLE Pracownicy DROP COLUMN nazwa;
+
+Tabela bez kolumny nazwa (od nowa):
+
+CREATE TABLE Pracownicy (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    imie VARCHAR(50) NOT NULL,
+    nazwisko VARCHAR(50) NOT NULL,
+    dzial INT NOT NULL,
+    zarobki INT NOT NULL
+);
+
+INSERT INTO Pracownicy (imie, nazwisko, dzial, zarobki) VALUES
+('Jan', 'Nowak', 1, 2500),
+('Adam', 'Kowalski', 1, 3500),
+('Robert', 'Brzozowski', 2, 1500);
+
+Jeśli nadal chcesz widzieć nazwę działu przy zapytaniu, ale bez trwałej kolumny, użyj CASE bezpośrednio w SELECT:
+
+SELECT id, imie, nazwisko, dzial, zarobki,
+    CASE 
+        WHEN dzial = 1 THEN 'Produkcja'
+        WHEN dzial = 2 THEN 'Marketing'
+    END AS nazwa
+FROM Pracownicy;
+
+Wynik będzie taki sam, ale nazwa nie istnieje fizycznie w tabeli — jest wyliczana tylko przy odczycie.
+
+
+Kopiuj
+
+
+jak powiązać te telefony z pracownikami zrób
+
+
+
+Zdefiniowanie klucza obcego w tabeli Telefon
+Najprostszy sposób — dodać kolumnę pracownik_id do tabeli Telefon, która odwołuje się do Pracownicy.id:
+
+ALTER TABLE Telefon
+    ADD COLUMN pracownik_id INT,
+    ADD CONSTRAINT fk_pracownik
+        FOREIGN KEY (pracownik_id) REFERENCES Pracownicy(id);
+
+Teraz przypisz telefony do pracowników:
+
+UPDATE Telefon SET pracownik_id = 1 WHERE id = 1;  -- aifon → Jan Nowak
+UPDATE Telefon SET pracownik_id = 2 WHERE id = 2;  -- motofoto → Adam Kowalski
+
+Sprawdzenie połączenia:
+
+SELECT p.imie, p.nazwisko, t.telefon
+FROM Pracownicy p
+JOIN Telefon t ON t.pracownik_id = p.id;
+
+Wynik:
+
+imie	nazwisko	telefon
+Jan	Nowak	aifon
+Adam	Kowalski	motofoto
+
+Robert Brzozowski nie ma telefonu (brak rekordu w Telefon), więc nie pojawia się w wyniku JOIN. Jeśli chcesz go też zobaczyć, użyj LEFT JOIN:
+
+SELECT p.imie, p.nazwisko, t.telefon
+FROM Pracownicy p
+LEFT JOIN Telefon t ON t.pracownik_id = p.id;
+
+Wtedy Robert pokaże się z telefon = NULL.
+
+Rozwijanie
+Jak usunąć powiązanie telefonu z pracownikiem?
+Co się stanie przy usuwaniu pracownika?
+Jak dodać więcej niż jeden numer?
+
+Kopiuj
+
+Spróbuj ponownie
+
+

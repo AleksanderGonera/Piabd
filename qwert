@@ -1,0 +1,8 @@
+ptaca domowa link z one drive na vulcan na przeglądarce
+na czwartek
+na swoim koncie github
+1. Projektujemy i uruchamiamy prostą stronę internetową naglowek stopka nazwisko imie 1 przycisk strona testowa i to wszystko strona moze byc w php jak pojawia sie php i wtedy zapisac jako index.php
+2. na stronie umieszczamy przycisk z dowolnym skryptem w php
+3. skrypt php ma wykonać dowolną operację na bazie danych
+przesyłamy link do działającej strony na github z bazą danych oraz link do dokumentu pdf(najpierw napisać w word chyba) opisującego proces konfiguracji (.pdf ma być plik)
+uruchomić serwer ze stroną i skonfigurować bazę danych

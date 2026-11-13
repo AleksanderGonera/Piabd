@@ -1,0 +1,48 @@
+what to do after creating github account overall and in settings
+
+Szybka odpowiedź
+After creating a GitHub account, prioritize security and identity configuration to ensure proper commit attribution and account protection. Verify your email address immediately, as this is required to link commits to your profile and access all features.  Enable two-factor authentication (2FA) using an authenticator app or passkey, as this is strongly recommended for account safety and may be required for certain organizational access.
+
+In Settings, configure the following critical options:
+
+Email Privacy: Under Settings > Emails, check Keep my email addresses private and Block command line pushes that expose my email to prevent your personal address from appearing in public commit history. 
+Authentication: Set up secure access by generating an SSH key (under Settings > SSH and GPG keys) or a Personal Access Token (under Developer settings) to use instead of a password for Git operations. 
+Profile Personalization: Edit your Public profile to add a professional username, bio, profile picture, and location; consider creating a profile README by making a repository named exactly after your username.
+Local Git Configuration: On your local machine, run git config --global user.name "Your Name" and git config --global user.email "your-email@example.com" to match the verified email on your GitHub account, ensuring your contributions are tracked correctly.
+
+Kopiuj
+
+🌐
+🌐
+🌐
+🌐
++16
+what more?
+
+
+
+Advanced GitHub setup tips
+Here's what else is worth doing beyond the basics:
+
+Security & Recovery
+
+Store your 2FA recovery codes in a password manager immediately after enabling 2FA — without them, a lost phone locks you out. 
+Add a backup email (Settings → Emails) so you can recover the account if your primary address becomes inaccessible.
+Add a passkey (Settings → Password and authentication) for passwordless, biometric login on trusted devices.
+Use a long-term email (personal, not a work address) so you don't lose account access when you change jobs. 
+Local Git Hardening
+
+Use the GitHub noreply email (ID+username@users.noreply.github.com) as your git config --global user.email — it's the anonymized address GitHub generates when you enable email privacy. 
+Consider commit signing with SSH keys (git config --global commit.gpgsign true + git config --global gpg.format ssh) so your commits are cryptographically verified.
+Profile & Visibility
+
+Pin 4–6 quality repos to your profile (Settings → Public profile → Pinned repositories) — curated projects beat a wall of forks. 
+Add topics/tags to each repo (Settings on the repo → About → Topics) for discoverability.
+Add a website/LinkedIn link to your profile sidebar.
+If you have private work you want to show activity for, enable "Include private contributions on my profile" (Settings → Public profile) — it shows green squares without exposing commits. 
+Check for shadow-ban: open your profile URL in an incognito window. If you see a 404, your new account may be flagged by GitHub's spam filters. 
+Ongoing Habits
+
+Write meaningful commit messages (not "fix" or "update") — your history is a portfolio.
+Aim for consistent small contributions rather than sporadic large dumps.
+Make at least one open-source contribution early (even a docs fix) to build your reputation.

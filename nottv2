@@ -1,0 +1,8 @@
+kod do shella xampp w jednej linii do tabeli która ma id,imie,nazwisko,dzial i 3 rekordy
+dodaj jeszcze 5 rekordów z losowymi imionami oprócz Jan Kowalski i Adam Nowak
+odzielna tabela id pesel
+odzielna tabela id rodzaj nauki (liceum, technikum, nie uczy się)
+odzielna tabela id miasto mieszkancy(ilosc)
+wyszukaj uczniów którzy chodzą do liceum
+wyszukaj uczniów którzy się nie uczą
+wyszukaj uczniów którzy chodzą do liceum gdzie liczba mieszkańców wynosi poniżej 30000

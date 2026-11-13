@@ -6,3 +6,220 @@ odzielna tabela id miasto mieszkancy(ilosc)
 wyszukaj uczniów którzy chodzą do liceum
 wyszukaj uczniów którzy się nie uczą
 wyszukaj uczniów którzy chodzą do liceum gdzie liczba mieszkańców wynosi poniżej 30000
+
+kod do shella xampp w jednej linii do tabeli która ma id,imie,nazwisko,dzial i 3 rekordy dodaj jeszcze 5 rekordów z losowymi imionami oprócz Jan Kowalski i Adam Nowak odzielna tabela id pesel odzielna tabela id rodzaj nauki (liceum, technikum, nie uczy się) odzielna tabela id miasto mieszkancy(ilosc) wyszukaj uczniów którzy chodzą do liceum wyszukaj uczniów którzy się nie uczą wyszukaj uczniów którzy chodzą do liceum gdzie liczba mieszkańców wynosi poniżej 30000
+Pokaż więcej
+
+
+Wygenerowano kompletny skrypt SQL
+
+🌐
+🌐
+🌐
+🌐
++6
+CREATE DATABASE IF NOT EXISTS szkoła; USE szkoła;
+CREATE TABLE pesel (id INT AUTO_INCREMENT PRIMARY KEY, pesel VARCHAR(11));
+CREATE TABLE rodzaj_nauki (id INT AUTO_INCREMENT PRIMARY KEY, rodzaj_nauki VARCHAR(50));
+CREATE TABLE miasta (id INT AUTO_INCREMENT PRIMARY KEY, miasto VARCHAR(50), mieszkancy INT);
+CREATE TABLE uczniowie (id INT AUTO_INCREMENT PRIMARY KEY, imie VARCHAR(50), nazwisko VARCHAR(50), dzial VARCHAR(50), id_pesel INT, id_rodzaj_nauki INT, id_miasto INT, FOREIGN KEY(id_pesel) REFERENCES pesel(id), FOREIGN KEY(id_rodzaj_nauki) REFERENCES rodzaj_nauki(id), FOREIGN KEY(id_miasto) REFERENCES miasta(id));
+INSERT INTO pesel(pesel) VALUES ('99030112345'),('00010123456'),('01050134567'),('02070145678'),('03090156789'),('04110167890'),('05010178901');
+INSERT INTO rodzaj_nauki(rodzaj_nauki) VALUES ('liceum'),('technikum'),('nie uczy się');
+INSERT INTO miasta(miasto, mieszkancy) VALUES ('Warszawa',1800000),('Kraków',780000),('Gdańsk',470000),('Zielona Góra',115000),('Nowa Sól',29000),('Międzyrzecz',25000),('Łagów',12000);
+INSERT INTO uczniowie(imie, nazwisko, dzial, id_pesel, id_rodzaj_nauki, id_miasto) VALUES ('Jan','Kowalski','Informatyka',1,1,1),('Adam','Nowak','Mechanika',2,2,2),('Piotr','Wiśniewski','Elektronika',3,3,3);
+INSERT INTO uczniowie(imie, nazwisko, dzial, id_pesel, id_rodzaj_nauki, id_miasto) VALUES ('Marta','Zielińska','Informatyka',4,1,4),('Tomasz','Lewandowski','Mechanika',5,2,5),('Ewa','Szymańska','Elektronika',6,1,6),('Kacper','Wójcik','Informatyka',7,3,7),('Zofia','Kaczmarek','Mechanika',1,1,5);
+SELECT u.imie, u.nazwisko FROM uczniowie u JOIN rodzaj_nauki r ON u.id_rodzaj_nauki=r.id WHERE r.rodzaj_nauki='liceum';
+SELECT u.imie, u.nazwisko FROM uczniowie u JOIN rodzaj_nauki r ON u.id_rodzaj_nauki=r.id WHERE r.rodzaj_nauki='nie uczy się';
+SELECT u.imie, u.nazwisko FROM uczniowie u JOIN rodzaj_nauki r ON u.id_rodzaj_nauki=r.id JOIN miasta m ON u.id_miasto=m.id WHERE r.rodzaj_nauki='liceum' AND m.mieszkancy<30000;
+
+Wyjaśnienie zapytań:
+
+#	Zapytanie	Wynik
+1	Uczniowie z liceum	Jan Kowalski, Marta Zielińska, Ewa Szymańska, Zofia Kaczmarek
+2	Uczniowie, którzy się nie uczą	Piotr Wiśniewski, Kacper Wójcik
+3	Liceum + miasto < 30 000 mieszkańców	Ewa Szymańska (Międzyrzecz, 25 000), Zofia Kaczmarek (Nowa Sól, 29 000)
+
+Wszystkie polecenia są w jednej linii – wklej je bezpośrednio w shell MySQL (XAMPP → phpMyAdmin → SQL lub terminal mysql -u root).
+
+
+XAMPP shell code Jan Kowalski Adam Nowak
+
+Zobacz wszystkie
+
+
+
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?a' at line 1?
+
+
+Resolved SQL encoding error for Polish characters
+Problem to kodowanie znaków – terminal nie obsługuje ł w szkoła, więc MariaDB widzi szko?a.
+
+Najszybsza naprawa – usuń polskie znaki z nazwy bazy:
+
+CREATE DATABASE IF NOT EXISTS szkola; USE szkola;
+
+Albo dodaj na początku:
+
+SET NAMES utf8mb4;
+
+i upewnij się, że plik .sql jest zapisany w UTF-8 (Bez BOM). Jeśli wklejasz bezpośrednio w terminal, to i tak bezpieczniej jest użyć szkola bez ł.
+
+
+
+
+zrób mi po kolei każdy kod
+
+
+Przekształcenie skryptu SQL
+Oto każdy kod osobno – wklejaj po kolei w shell MySQL:
+
+1. Ustaw kodowanie:
+
+SET NAMES utf8mb4;
+
+2. Utwórz bazę i przełącz się na nią:
+
+CREATE DATABASE IF NOT EXISTS szkola;
+
+USE szkola;
+
+3. Tabela pesel:
+
+CREATE TABLE pesel (id INT AUTO_INCREMENT PRIMARY KEY, pesel VARCHAR(11));
+
+4. Tabela rodzaj_nauki:
+
+CREATE TABLE rodzaj_nauki (id INT AUTO_INCREMENT PRIMARY KEY, rodzaj_nauki VARCHAR(50));
+
+5. Tabela miasta:
+
+CREATE TABLE miasta (id INT AUTO_INCREMENT PRIMARY KEY, miasto VARCHAR(50), mieszkancy INT);
+
+6. Tabela uczniowie:
+
+CREATE TABLE uczniowie (id INT AUTO_INCREMENT PRIMARY KEY, imie VARCHAR(50), nazwisko VARCHAR(50), dzial VARCHAR(50), id_pesel INT, id_rodzaj_nauki INT, id_miasto INT, FOREIGN KEY(id_pesel) REFERENCES pesel(id), FOREIGN KEY(id_rodzaj_nauki) REFERENCES rodzaj_nauki(id), FOREIGN KEY(id_miasto) REFERENCES miasta(id));
+
+7. Wstaw dane do pesel:
+
+INSERT INTO pesel(pesel) VALUES ('99030112345'),('00010123456'),('01050134567'),('02070145678'),('03090156789'),('04110167890'),('05010178901');
+
+8. Wstaw dane do rodzaj_nauki:
+
+INSERT INTO rodzaj_nauki(rodzaj_nauki) VALUES ('liceum'),('technikum'),('nie uczy sie');
+
+9. Wstaw dane do miasta:
+
+INSERT INTO miasta(miasto, mieszkancy) VALUES ('Warszawa',1800000),('Krakow',780000),('Gdansk',470000),('Zielona Gora',115000),('Nowa Sol',29000),('Miedzyrzecz',25000),('Lagow',12000);
+
+10. Wstaw 3 pierwsze rekordy do uczniowie:
+
+INSERT INTO uczniowie(imie, nazwisko, dzial, id_pesel, id_rodzaj_nauki, id_miasto) VALUES ('Jan','Kowalski','Informatyka',1,1,1),('Adam','Nowak','Mechanika',2,2,2),('Piotr','Wisniewski','Elektronika',3,3,3);
+
+11. Wstaw kolejne 5 rekordów (losowe imiona):
+
+INSERT INTO uczniowie(imie, nazwisko, dzial, id_pesel, id_rodzaj_nauki, id_miasto) VALUES ('Marta','Zielinska','Informatyka',4,1,4),('Tomasz','Lewandowski','Mechanika',5,2,5),('Ewa','Szymanska','Elektronika',6,1,6),('Kacper','Wojcik','Informatyka',7,3,7),('Zofia','Kaczmarek','Mechanika',1,1,5);
+
+12. Zapytanie – uczniowie z liceum:
+
+SELECT u.imie, u.nazwisko FROM uczniowie u JOIN rodzaj_nauki r ON u.id_rodzaj_nauki=r.id WHERE r.rodzaj_nauki='liceum';
+
+13. Zapytanie – uczniowie, którzy się nie uczą:
+
+SELECT u.imie, u.nazwisko FROM uczniowie u JOIN rodzaj_nauki r ON u.id_rodzaj_nauki=r.id WHERE r.rodzaj_nauki='nie uczy sie';
+
+14. Zapytanie – liceum + miasto < 30 000 mieszkańców:
+
+SELECT u.imie, u.nazwisko FROM uczniowie u JOIN rodzaj_nauki r ON u.id_rodzaj_nauki=r.id JOIN miasta m ON u.id_miasto=m.id WHERE r.rodzaj_nauki='liceum' AND m.mieszkancy<30000;
+
+Wskazówka: Jeśli nadal dostajesz błąd ? – wklejaj kod bezpośrednio w phpMyAdmin → zakładka SQL (nie w terminal), tam kodowanie jest zawsze UTF-8.
+
+
+
+
+zrób te kodu naturalnie a nie u. ani id=r etc etc
+
+
+Przepisanie zapytań SQL
+Oto zapytania bez aliasów:
+
+12. Zapytanie – uczniowie z liceum:
+
+SELECT uczniowie.imie, uczniowie.nazwisko FROM uczniowie JOIN rodzaj_nauki ON uczniowie.id_rodzaj_nauki = rodzaj_nauki.id WHERE rodzaj_nauki.rodzaj_nauki = 'liceum';
+
+13. Zapytanie – uczniowie, którzy się nie uczą:
+
+SELECT uczniowie.imie, uczniowie.nazwisko FROM uczniowie JOIN rodzaj_nauki ON uczniowie.id_rodzaj_nauki = rodzaj_nauki.id WHERE rodzaj_nauki.rodzaj_nauki = 'nie uczy sie';
+
+14. Zapytanie – liceum + miasto < 30 000 mieszkańców:
+
+SELECT uczniowie.imie, uczniowie.nazwisko FROM uczniowie JOIN rodzaj_nauki ON uczniowie.id_rodzaj_nauki = rodzaj_nauki.id JOIN miasta ON uczniowie.id_miasto = miasta.id WHERE rodzaj_nauki.rodzaj_nauki = 'liceum' AND miasta.mieszkancy < 30000;
+
+
+
+
+najpierw robie uczniowie potem inne i musi być naprawdę foreign key i references?
+
+
+Wyjaśnienie zależności tabel
+Nie, FOREIGN KEY i REFERENCES są opcjonalne. Możesz je pominąć – kolumny id_pesel, id_rodzaj_nauki, id_miasto będą po prostu zwykłym INT.
+
+Jeśli chcesz robić uczniowie jako pierwszą tabelę, to musisz usunąć FOREIGN KEY:
+
+CREATE TABLE uczniowie (id INT AUTO_INCREMENT PRIMARY KEY, imie VARCHAR(50), nazwisko VARCHAR(50), dzial VARCHAR(50), id_pesel INT, id_rodzaj_nauki INT, id_miasto INT);
+
+Pozostałe tabele tworzysz normalnie, w dowolnej kolejności:
+
+CREATE TABLE pesel (id INT AUTO_INCREMENT PRIMARY KEY, pesel VARCHAR(11));
+
+CREATE TABLE rodzaj_nauki (id INT AUTO_INCREMENT PRIMARY KEY, rodzaj_nauki VARCHAR(50));
+
+CREATE TABLE miasta (id INT AUTO_INCREMENT PRIMARY KEY, miasto VARCHAR(50), mieszkancy INT);
+
+Zasada: Jeśli używasz FOREIGN KEY ... REFERENCES, to tablica, na którą wskazujesz (pesel, rodzaj_nauki, miasta), musi istnieć wcześniej. Bez FOREIGN KEY – kolejność nie ma znaczenia.
+
+
+
+
+te selecty chcę najłatwiejsze ale dobre
+
+
+Wybór najprostszych zapytań SQL
+12. Liceum:
+
+SELECT uczniowie.imie, uczniowie.nazwisko FROM uczniowie JOIN rodzaj_nauki ON uczniowie.id_rodzaj_nauki = rodzaj_nauki.id WHERE rodzaj_nauki.rodzaj_nauki = 'liceum';
+
+13. Nie uczy się:
+
+SELECT uczniowie.imie, uczniowie.nazwisko FROM uczniowie JOIN rodzaj_nauki ON uczniowie.id_rodzaj_nauki = rodzaj_nauki.id WHERE rodzaj_nauki.rodzaj_nauki = 'nie uczy sie';
+
+14. Liceum + miasto < 30000:
+
+SELECT uczniowie.imie, uczniowie.nazwisko FROM uczniowie JOIN rodzaj_nauki ON uczniowie.id_rodzaj_nauki = rodzaj_nauki.id JOIN miasta ON uczniowie.id_miasto = miasta.id WHERE rodzaj_nauki.rodzaj_nauki = 'liceum' AND miasta.mieszkancy < 30000;
+
+To jest już najprostsza poprawna forma – JOIN + WHERE. Nie da się krócej bez tracenia czytelności.
+
+
+
+
+ja jestem w tej bazie czyli nie muszę określać aż tak
+
+
+
+Potwierdzenie prostoty zapytań
+Te zapytania już nie mają prefiksu bazy danych – są w najprostszej formie. Jeśli jesteś w szkola, to działają tak, jak są.
+
+Jeśli chcesz jeszcze prościej (bez JOIN), możesz używać numerów id bezpośrednio:
+
+12. Liceum:
+
+SELECT imie, nazwisko FROM uczniowie WHERE id_rodzaj_nauki = 1;
+
+13. Nie uczy się:
+
+SELECT imie, nazwisko FROM uczniowie WHERE id_rodzaj_nauki = 3;
+
+14. Liceum + miasto < 30000:
+
+SELECT imie, nazwisko FROM uczniowie WHERE id_rodzaj_nauki = 1 AND id_miasto IN (SELECT id FROM miasta WHERE mieszkancy < 30000);
+
+⚠️ Wersja z JOIN jest "lepsza" do oceny, bo pokazuje że rozumiesz relacje. Wersja z id działa, ale jeśli ktoś zmieni kolejność w rodzaj_nauki, zapytanie się zepsuje.
